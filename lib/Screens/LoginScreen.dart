@@ -18,7 +18,7 @@ class LoginScreen extends StatelessWidget {
       onWillPop: () => backPressed(context),
       child: Scaffold(
         appBar: CustomAppBar(
-          title: AppStrings.login.localized(context),
+          title: AppStrings.login.toLocalized(context),
         ),
         body: Center(
             child: Column(
@@ -26,45 +26,46 @@ class LoginScreen extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Form(
-                    key: formKey,
-                    child: Column(
-                      children: [
-                        Row(
-                          children: [
-                            Expanded(
-                              child: CustomTextField(
-                                controller: TextEditingController(),
-                                validator: (val) {
-                                  if (!Utils.isValidEmail(val)) {
-                                    return "Enter valid email";
-                                  }
-                                  return null;
-                                },
-                                hint: "Enter email",
-                                displayError: true,
-                                keyboardType: TextInputType.emailAddress,
-                                onChange: (val) {
-                                  formKey.currentState!.validate();
-                                },
-                              ),
-                            ),
-                            CustomCheckBox(
-                              initVal: checkBoxVal,
-                              radius: 5,
-                              onChnage: (value) {
-                                checkBoxVal = value;
+                  key: formKey,
+                  child: Column(
+                    children: [
+                      Row(
+                        children: [
+                          Expanded(
+                            child: CustomTextField(
+                              controller: TextEditingController(),
+                              validator: (val) {
+                                if (!Utils.isValidEmail(val)) {
+                                  return "Enter valid email";
+                                }
+                                return null;
+                              },
+                              hint: "Enter email",
+                              displayError: true,
+                              keyboardType: TextInputType.emailAddress,
+                              onChange: (val) {
+                                formKey.currentState!.validate();
                               },
                             ),
-                            SizedBox(
-                              width: 10,
-                            )
-                          ],
-                        ),
-                      ],
-                    )),
+                          ),
+                          CustomCheckBox(
+                            initVal: checkBoxVal,
+                            radius: 5,
+                            onChnage: (value) {
+                              checkBoxVal = value;
+                            },
+                          ),
+                          SizedBox(
+                            width: 10,
+                          )
+                        ],
+                      ),
+                    ],
+                  ),
+                ),
                 SizedBox(height: 10,),
                 CustomButton(
-                  title: AppStrings.login.localized(context),
+                  title: AppStrings.login.toLocalized(context),
                   onTap: () {
                     if(formKey.currentState!.validate()){
                       Navigator.pushNamed(context,Routes.homeScreen);
@@ -73,7 +74,7 @@ class LoginScreen extends StatelessWidget {
                 ),
                 SizedBox(height: 5,),
                 CustomButton(
-                  title: AppStrings.change_language.localized(context),
+                  title: AppStrings.change_language.toLocalized(context),
                   onTap: () {
                     if(currentAppLocal.value == supportedLocales.first){
                       currentAppLocal.value = supportedLocales[1];

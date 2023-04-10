@@ -41,7 +41,7 @@ Future<bool> onWillPop(BuildContext context) {
  if (currentBackPressTime == null || now.difference(currentBackPressTime!) > Duration(seconds: 2)) {
   currentBackPressTime = now;
 
-  Utils.showToast(AppStrings.exit_msg.localized(context),);
+  Utils.showToast(AppStrings.exit_msg.toLocalized(context),);
   return Future.value(false);
  }
  return Future.value(true);

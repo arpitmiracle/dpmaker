@@ -6,7 +6,7 @@ import 'package:intl/intl.dart';
 ///  all the extensions that are used in app is declared in this file.
 
 extension StringExtension on String {
-  String localized(BuildContext context) =>
+  String toLocalized(BuildContext context) =>
       LocalizationService.of(context)!.translate(this);
 
   /// Convert DateString to DateTime Object

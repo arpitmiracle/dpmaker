@@ -7,7 +7,7 @@ import 'package:hive_flutter/hive_flutter.dart';
 class HiveStoreUtil {
   static String storageKey = "storageKey";
   static String noInternetListKey = "noInternetListKey";
-  static var hiveBox = Hive.box('Demo');
+  static var hiveBox = Hive.box('DpMaker');
 
   static void setString(String key,String value){
     hiveBox.put(key, value);
