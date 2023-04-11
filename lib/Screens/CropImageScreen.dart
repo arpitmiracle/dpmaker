@@ -55,7 +55,7 @@ class CropImageScreen extends StatelessWidget {
         onPressed: () async {
           ui.Image img = await controller.croppedBitmap();
           var byteData = (await img.toByteData(format: ui.ImageByteFormat.png))!.buffer.asUint8List();
-          Navigator.push(context, MaterialPageRoute(builder: (context) => FrameImageScreen(imageBytes: byteData),));
+          Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => FrameImageScreen(imageBytes: byteData),));
         },
         child: const Text('Done'),
       ),
