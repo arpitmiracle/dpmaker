@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:dpmaker/Screens/CropImageScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:custom_elements/custom_elements.dart';
 import 'package:image_picker/image_picker.dart';
@@ -22,7 +23,7 @@ class HomeScreen extends StatelessWidget {
       onWillPop: () => backPressed(context),
       child: Scaffold(
         appBar: CustomAppBar(
-          title: AppStrings.cut9_photos.toLocalized(context),
+          title: AppStrings.dp_maker.toLocalized(context),
           iconSize: 0,
         ),
         backgroundColor: CustomColors.scaffoldBgColor,
@@ -58,7 +59,7 @@ class HomeScreen extends StatelessWidget {
                         ),
                         InkWell(
                           onTap: () {
-
+                            onSelected(context);
                           },
                           child: CircleAvatar(
                             radius: 8.w,
@@ -87,7 +88,9 @@ class HomeScreen extends StatelessWidget {
 
       final XFile? image = await _picker.pickImage(source: val == 1 ? ImageSource.camera : ImageSource.gallery);
       progressBar.hide();
-
+      if(image != null){
+        Navigator.push(context, MaterialPageRoute(builder: (context) => CropImageScreen(imagePath: image.path),));
+      }
     },);
 
   }

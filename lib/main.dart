@@ -41,7 +41,7 @@ class MyApp extends StatelessWidget {
                 );
               },
               routes: Screens.screens,
-              initialRoute: Routes.loginScreen,
+              initialRoute: Routes.homeScreen,
               supportedLocales: supportedLocales,
               locale: value,
               localizationsDelegates: [

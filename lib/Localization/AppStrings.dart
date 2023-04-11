@@ -4,6 +4,7 @@
 class AppStrings{
   static const home = 'home';
   static const login = 'login';
+  static const dp_maker = 'dp_maker';
   static const change_language = 'change_language';
   static const something_wrong = "something_wrong";
   static const exit_msg = "exit_msg";
