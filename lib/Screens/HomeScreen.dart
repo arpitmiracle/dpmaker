@@ -22,106 +22,105 @@ class HomeScreen extends StatelessWidget {
     return WillPopScope(
       onWillPop: () => backPressed(context),
       child: Scaffold(
-        appBar: CustomAppBar(
-          title: AppStrings.dp_maker.toLocalized(context),
-          iconSize: 0,
-        ),
-        backgroundColor: CustomColors.scaffoldBgColor,
         body: Container(
           height: 100.h,
           width: 100.w,
-          alignment: Alignment.center,
-            child: Column(
-              children: [
-                Align(
-                  alignment: Alignment.bottomCenter,
-                  child: Container(
-                    padding: EdgeInsets.all(5.w),
-                    decoration: BoxDecoration(
-                      color: CustomColors.cardBgColor,
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                    width: 60.w,
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      children: [
-                        InkWell(
-                          onTap: () {
-                            Share.share(AppStrings.share_app_description.toLocalized(context));
-                          },
-                          child: CircleAvatar(
-                            radius: 8.w,
-                            backgroundColor: CustomColors.primary,
-                            child: Center(
-                              child: Icon(IconPath.share,color: CustomColors.scaffoldBgColor,size: 8.w),
-                            ),
-                          ),
+          decoration: BoxDecoration(
+              image: DecorationImage(
+                image: AssetImage(ImagePath.bg_home),
+                fit: BoxFit.cover,
+              )
+          ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.end,
+            children: [
+              Expanded(
+                child: Container(
+                  padding: EdgeInsets.all(5.w),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      InkWell(
+                        onTap: () {
+                          Share.share(AppStrings.share_app_description.toLocalized(context));
+                        },
+                        child: CircleAvatar(
+                          backgroundImage: AssetImage(ImagePath.ic_share),
+                          radius: 30,
                         ),
-                        InkWell(
-                          onTap: () {
-                            onSelected(context);
-                          },
-                          child: CircleAvatar(
-                            radius: 8.w,
-                            backgroundColor: CustomColors.primary,
-                            child: Center(
-                              child: Icon(IconPath.star_rate,color: CustomColors.scaffoldBgColor,size: 8.w),
-                            ),
-                          ),
+                      ),
+                      SizedBox(height: 10,),
+                      InkWell(
+                        onTap: () {
+                          launchUrl(Uri.parse("https://github.com/"));
+                        },
+                        child: CircleAvatar(
+                          backgroundImage: AssetImage(ImagePath.ic_star),
+                          radius: 30,
                         ),
-                      ],
-                    ),
+                      ),
+                    ],
                   ),
                 ),
-                SizedBox(height: 3.h,),
-              ],
-            )),
+              ),
+              SizedBox(height: 3.h,),
+              Container(
+                height: 75,
+                decoration: BoxDecoration(
+                  gradient: LinearGradient(
+                    colors: [
+                      Color(0xffdf97a9),
+                      Color(0xffe4a9ad),
+                      Color(0xfff7e8c1),
+                    ],
+                  ),
+                ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    InkWell(
+                      onTap: () {
+                        onSelected(context,2);
+                      },
+                      child: Image.asset(ImagePath.ic_gallery,height: 50,),
+                    ),
+                    SizedBox(width: 10.w,),
+                    InkWell(
+                      onTap: () {
+
+                      },
+                      child: Image.asset(ImagePath.ic_my_album,height: 50,),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
+        ),
+        floatingActionButton: InkWell(
+          onTap: () async {
+            onSelected(context,1);
+          },
+          child: Container(
+              height: 80,
+              width: 80,
+              margin: EdgeInsets.only(bottom: 15),
+              child: Image.asset(ImagePath.ic_camera,),
+          ),
+        ),
+        floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       ),
     );
   }
 
- void onSelected(BuildContext context,){
-    showSelectTypeDialog(context,onTypeTap: (val) async {
-      Navigator.pop(context);
-      CustomProgressBar progressBar = CustomProgressBar();
-      progressBar.show(context);
-
-      final XFile? image = await _picker.pickImage(source: val == 1 ? ImageSource.camera : ImageSource.gallery);
-      progressBar.hide();
-      if(image != null){
-        Navigator.push(context, MaterialPageRoute(builder: (context) => CropImageScreen(imagePath: image.path),));
-      }
-    },);
-
+  onSelected(BuildContext context, val)async{
+    CustomProgressBar progressBar = CustomProgressBar();
+    progressBar.show(context);
+    final XFile? image = await _picker.pickImage(source: val == 1 ? ImageSource.camera : ImageSource.gallery);
+    progressBar.hide();
+    if(image != null){
+      Navigator.push(context, MaterialPageRoute(builder: (context) => CropImageScreen(imagePath: image.path),));
+    }
   }
-}
 
-class DashboardItem extends StatelessWidget {
-  String imagepath;
-  String title;
-  double width;
-  VoidCallback onTap;
-  DashboardItem({Key? key,required this.imagepath,required this.title,required this.onTap,required this.width}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return InkWell(
-      onTap: onTap,
-      child: Container(
-        padding: EdgeInsets.all(5.w),
-        decoration: BoxDecoration(
-          color: CustomColors.cardBgColor,
-          borderRadius: BorderRadius.circular(10),
-        ),
-        width: width,
-        child: Column(
-          children: [
-            Image.asset(imagepath,height: 12.w),
-            SizedBox(height: 1.h,),
-            CustomTitle(title: title,fontColor: CustomColors.primary),
-          ],
-        ),
-      ),
-    );
-  }
 }

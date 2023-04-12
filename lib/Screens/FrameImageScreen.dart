@@ -9,6 +9,9 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:screenshot/screenshot.dart';
 
+import 'Frames/FlipRotate.dart';
+import 'Frames/frameSelection.dart';
+
 class FrameImageScreen extends StatelessWidget {
   var imageBytes;
   FrameImageScreen({required this.imageBytes});
@@ -21,22 +24,25 @@ class FrameImageScreen extends StatelessWidget {
       appBar: AppBar(
         title: Text("Frame image"),
         actions: [
-          IconButton(onPressed: () {
-            screenshotController
-                .capture(delay: Duration(milliseconds: 10))
-                .then((capturedImage) async {
-              //Save single image file
-              DocumentFileSavePlus().saveFile(capturedImage!, "DP_${DateTime.now()}.png", "image/png");
-            }).catchError((onError) {
-              print(onError);
-            });
-          }, icon: Icon(Icons.save_alt)),
+          PopupMenuButton(
+            itemBuilder: (context) {
+              return [
+                PopupMenuItem(child: Text("Save as png"),value: 1),
+                PopupMenuItem(child: Text("Save as transparent png"),value: 2),
+              ];
+            },
+            icon: Icon(Icons.save_alt),
+            onSelected: (value) {
+              saveImage();
+            },
+          ),
         ],
       ),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Padding(
+          Container(
+            color: Colors.grey.withOpacity(0.1),
             padding: EdgeInsets.symmetric(vertical: 10),
             child: Screenshot(
               controller: screenshotController,
@@ -46,13 +52,19 @@ class FrameImageScreen extends StatelessWidget {
                   height: 90.w,
                   child: Obx(() => Stack(
                     children: [
-                      CircleAvatar(
-                        backgroundImage: MemoryImage(imageBytes,),
-                        radius: double.infinity,
+                      Transform.rotate(
+                        angle: controller.imageRotation.value,
+                        child: Obx(() => Transform.scale(
+                          scale: controller.imageResize.value,
+                          child: CircleAvatar(
+                            backgroundImage: MemoryImage(imageBytes,),
+                            radius: (double.infinity) / 2,
+                          ),
+                        ),)
                       ),
                       Transform.rotate(
                         angle: controller.currentRotation.value,
-                        child: Image.asset("assets/frames/Flowers/border_flower_12.png", fit: BoxFit.cover,),
+                        child: Image.asset(controller.selectedFrame.value, fit: BoxFit.cover,),
                       ),
                     ],
                   )),
@@ -72,26 +84,45 @@ class FrameImageScreen extends StatelessWidget {
             controller: controller.tabController,
             tabs: [
               Tab(
-                icon: Icon(Icons.add),
+                icon: Icon(Icons.filter_frames,color: Colors.black,),
               ),
               Tab(
-                icon: Icon(Icons.add),
+                icon: Icon(Icons.circle,color: Colors.black),
               ),
               Tab(
-                icon: Icon(Icons.add),
+                icon: Icon(Icons.photo,color: Colors.black),
+              ),
+              Tab(
+                icon: Icon(Icons.person,color: Colors.black),
+              ),
+              Tab(
+                icon: Icon(Icons.text_fields,color: Colors.black),
               ),
             ],
           ),
           Expanded(child: TabBarView(
             controller: controller.tabController,
             children: [
+              FrameSelection(),
               Container(),
+              FlipRotate(),
               Container(),
               Container(),
             ],
-          ))
+          )),
         ],
       ),
     );
+  }
+
+  saveImage(){
+    screenshotController
+        .capture(delay: Duration(milliseconds: 10))
+        .then((capturedImage) async {
+      //Save single image file
+      DocumentFileSavePlus().saveFile(capturedImage!, "DP_${DateTime.now()}.png", "image/png");
+    }).catchError((onError) {
+      print(onError);
+    });
   }
 }
