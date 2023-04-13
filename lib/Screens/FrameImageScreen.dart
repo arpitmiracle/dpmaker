@@ -56,9 +56,13 @@ class FrameImageScreen extends StatelessWidget {
                         angle: controller.imageRotation.value,
                         child: Obx(() => Transform.scale(
                           scale: controller.imageResize.value,
-                          child: CircleAvatar(
-                            backgroundImage: MemoryImage(imageBytes,),
-                            radius: (double.infinity) / 2,
+                          child: Transform.scale(
+                            scaleX: controller.imageFlipHorizontal.value ? 1 : -1,
+                            scaleY: controller.imageFlipVertical.value ? -1 : 1,
+                            child: CircleAvatar(
+                              backgroundImage: MemoryImage(imageBytes,),
+                              radius: double.infinity,
+                            ),
                           ),
                         ),)
                       ),
@@ -80,6 +84,17 @@ class FrameImageScreen extends StatelessWidget {
               controller.currentRotation.value = value;
             },
           )),
+
+          Expanded(child: TabBarView(
+            controller: controller.tabController,
+            children: [
+              FrameSelection(),
+              Container(),
+              FlipRotate(),
+              Container(),
+              Container(),
+            ],
+          )),
           TabBar(
             controller: controller.tabController,
             tabs: [
@@ -100,16 +115,6 @@ class FrameImageScreen extends StatelessWidget {
               ),
             ],
           ),
-          Expanded(child: TabBarView(
-            controller: controller.tabController,
-            children: [
-              FrameSelection(),
-              Container(),
-              FlipRotate(),
-              Container(),
-              Container(),
-            ],
-          )),
         ],
       ),
     );
