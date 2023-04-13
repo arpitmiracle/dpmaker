@@ -80,6 +80,7 @@ flutter:
   assets:
     - assets/frames/
     - assets/images/
+    - assets/icons/
     - assets/frames/Basic/
     - assets/frames/Black/
     - assets/frames/Colorful/

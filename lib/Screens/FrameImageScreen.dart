@@ -4,12 +4,15 @@ import 'dart:ui' as ui;
 import 'package:crop_image/crop_image.dart';
 import 'package:custom_elements/custom_elements.dart';
 import 'package:document_file_save_plus/document_file_save_plus.dart';
+import 'package:dpmaker/Constants/ImagePath.dart';
 import 'package:dpmaker/Controllers/FrameImageController.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:screenshot/screenshot.dart';
 
 import 'Frames/FlipRotate.dart';
+import 'Frames/FrameFilters.dart';
+import 'Frames/FrameStickers.dart';
 import 'Frames/frameSelection.dart';
 
 class FrameImageScreen extends StatelessWidget {
@@ -59,10 +62,19 @@ class FrameImageScreen extends StatelessWidget {
                           child: Transform.scale(
                             scaleX: controller.imageFlipHorizontal.value ? 1 : -1,
                             scaleY: controller.imageFlipVertical.value ? -1 : 1,
-                            child: CircleAvatar(
+                            child: Obx(() => controller.selectedColorFilter.value != null ? ClipRRect(
+                              borderRadius: BorderRadius.circular(200),
+                              child: ColorFiltered(
+                                colorFilter: controller.selectedColorFilter.value!,
+                                child: CircleAvatar(
+                                  backgroundImage: MemoryImage(imageBytes,),
+                                  radius: double.infinity,
+                                ),
+                              ),
+                            ) : CircleAvatar(
                               backgroundImage: MemoryImage(imageBytes,),
                               radius: double.infinity,
-                            ),
+                            ),)
                           ),
                         ),)
                       ),
@@ -70,6 +82,7 @@ class FrameImageScreen extends StatelessWidget {
                         angle: controller.currentRotation.value,
                         child: Image.asset(controller.selectedFrame.value, fit: BoxFit.cover,),
                       ),
+                      if(controller.selectedSticker.value.isNotEmpty) Center(child: Image.asset(controller.selectedSticker.value,height: 30,)),
                     ],
                   )),
                 ),
@@ -89,9 +102,9 @@ class FrameImageScreen extends StatelessWidget {
             controller: controller.tabController,
             children: [
               FrameSelection(),
-              Container(),
+              FrameFilter(),
               FlipRotate(),
-              Container(),
+              FrameStickers(),
               Container(),
             ],
           )),
@@ -99,7 +112,7 @@ class FrameImageScreen extends StatelessWidget {
             controller: controller.tabController,
             tabs: [
               Tab(
-                icon: Icon(Icons.filter_frames,color: Colors.black,),
+                child: Image.asset(ImagePath.ic_photos),
               ),
               Tab(
                 icon: Icon(Icons.circle,color: Colors.black),
@@ -114,6 +127,7 @@ class FrameImageScreen extends StatelessWidget {
                 icon: Icon(Icons.text_fields,color: Colors.black),
               ),
             ],
+            indicatorColor: CustomColors.primary,
           ),
         ],
       ),

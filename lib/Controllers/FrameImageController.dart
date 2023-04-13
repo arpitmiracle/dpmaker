@@ -11,12 +11,16 @@ class FrameImageController extends GetxController with GetTickerProviderStateMix
   RxBool imageFlipHorizontal = false.obs;
   late TabController tabController;
   late TabController frameTabController;
+  late TabController stickerTabController;
   RxString selectedFrame = (framesList.first['frames'].first.toString()).obs;
+  RxString selectedSticker = "".obs;
+  Rx<ColorFilter?> selectedColorFilter = null.obs;
 
   @override
   void onInit() {
     tabController = TabController(length: 5, vsync: this);
     frameTabController = TabController(length: framesList.length, vsync: this);
+    stickerTabController = TabController(length: stickersList.length, vsync: this);
     super.onInit();
   }
 }
