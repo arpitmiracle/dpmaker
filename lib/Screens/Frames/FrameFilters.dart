@@ -16,7 +16,7 @@ class FrameFilter extends StatelessWidget {
     return GridView.builder(
       itemCount: filtersList.length,
       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-        crossAxisCount: 5,
+        crossAxisCount: 4,
         mainAxisSpacing: 10,
         crossAxisSpacing: 10,
       ),
