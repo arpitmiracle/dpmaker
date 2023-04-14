@@ -95,7 +95,7 @@ class FrameImageScreen extends StatelessWidget {
                                   ),
                                 ),)
                             ),
-                            Transform.rotate(
+                            if(controller.selectedFrame.value.isNotEmpty) Transform.rotate(
                               angle: controller.currentRotation.value,
                               child: Image.asset(controller.selectedFrame.value, fit: BoxFit.cover,),
                             ),

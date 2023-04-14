@@ -46,7 +46,12 @@ class FrameSelection extends StatelessWidget {
                     onTap: () {
                       controller.selectedFrame.value = framesList[i]['frames'][index];
                     },
-                    child: Image.asset(framesList[i]['frames'][index]),
+                    child: Stack(
+                      children: [
+                        framesList[i]['frames'][index].toString().isEmpty ? Container() : Image.asset(framesList[i]['frames'][index]),
+                        Obx(() => (controller.selectedFrame.value == framesList[i]['frames'][index]) ? Center(child: Icon(Icons.done),) : SizedBox())
+                      ],
+                    ),
                   );
                 },
               ),

@@ -29,6 +29,7 @@ class MyApp extends StatelessWidget {
           builder: (BuildContext context, Locale value, Widget? child) {
             return GetMaterialApp(
               title: 'DP Maker',
+              debugShowCheckedModeBanner: false,
               theme: ThemeData(
                 primarySwatch: CustomColors.swatch,
                 visualDensity: VisualDensity.adaptivePlatformDensity,

@@ -1,5 +1,6 @@
 import 'package:custom_elements/custom_elements.dart';
 import 'package:dpmaker/Constants/Constants.dart';
+import 'package:dpmaker/Constants/ImagePath.dart';
 import 'package:dpmaker/Controllers/FrameImageController.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -20,19 +21,32 @@ class FlipRotate extends StatelessWidget {
             mainAxisSize: MainAxisSize.min,
             children: [
               CustomText(text: "Flip"),
-              SizedBox(width: 30,),
-              IconButton(
-                onPressed: () {
+              SizedBox(width: 15.w,),
+              InkWell(
+                child: Obx(() => Image.asset(ImagePath.ic_horizontal,width: 30,color: controller.imageFlipHorizontal.value ? CustomColors.primary : CustomColors.black)),
+                onTap: () {
                   controller.imageFlipHorizontal.value = !controller.imageFlipHorizontal.value;
                 },
-                icon: Icon(Icons.flip),
               ),
-              IconButton(
-                onPressed: () {
+              SizedBox(width: 30,),
+              InkWell(
+                child: Obx(() => Image.asset(ImagePath.ic_vertical,width: 30,color: controller.imageFlipVertical.value ? CustomColors.primary : CustomColors.black,)),
+                onTap: () {
                   controller.imageFlipVertical.value = !controller.imageFlipVertical.value;
                 },
-                icon: Icon(Icons.flip_to_front),
               ),
+              // IconButton(
+              //   onPressed: () {
+              //     controller.imageFlipHorizontal.value = !controller.imageFlipHorizontal.value;
+              //   },
+              //   icon: Icon(Icons.flip),
+              // ),
+              // IconButton(
+              //   onPressed: () {
+              //     controller.imageFlipVertical.value = !controller.imageFlipVertical.value;
+              //   },
+              //   icon: Icon(Icons.flip_to_front),
+              // ),
             ],
           ),
           Row(

@@ -1,5 +1,6 @@
 import 'dart:math' as math;
 
+import 'package:custom_elements/Elements/CustomColors.dart';
 import 'package:dpmaker/Constants/Constants.dart';
 import 'package:dpmaker/Constants/ImagePath.dart';
 import 'package:dpmaker/Controllers/FrameImageController.dart';
@@ -26,12 +27,20 @@ class FrameFilter extends StatelessWidget {
           onTap: () {
             controller.selectedColorFilter.value = filtersList[index];
           },
-          child: ClipRRect(
-            borderRadius: BorderRadius.circular(45),
-            child: ColorFiltered(
-              colorFilter: filtersList[index],
-              child: Image.asset(ImagePath.ic_flower),
-            ),
+          child: Stack(
+            children: [
+              ClipRRect(
+                borderRadius: BorderRadius.circular(180),
+                child: ColorFiltered(
+                  colorFilter: filtersList[index],
+                  child: CircleAvatar(
+                    backgroundImage: AssetImage(ImagePath.img_filter),
+                    radius: double.infinity,
+                  ),
+                ),
+              ),
+              Obx(() => (controller.selectedColorFilter.value == filtersList[index]) ? Center(child: Icon(Icons.done,color: CustomColors.white,),) : SizedBox())
+            ],
           ),
         );
       },

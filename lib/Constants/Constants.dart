@@ -26,6 +26,7 @@ List framesList = [
   {
     "category" : "Basic",
     "frames" : [
+      "",
       "assets/frames/Basic/border_basic_02.png",
       "assets/frames/Basic/border_basic_03.png",
       "assets/frames/Basic/border_basic_04.png",
@@ -594,8 +595,9 @@ List stickersList = [
 ];
 
 List<ColorFilter> filtersList = [
+  ColorFilter.mode(Colors.transparent, BlendMode.color),
   ColorFilter.mode(Colors.grey, BlendMode.color),
-  ColorFilter.mode(Colors.red, BlendMode.color),
+  ColorFilter.mode(Colors.black, BlendMode.color),
   ColorFilter.linearToSrgbGamma(),
   ColorFilter.srgbToLinearGamma(),
   ColorFilter.matrix([
@@ -610,5 +612,8 @@ List<ColorFilter> filtersList = [
     0.272, 0.534, 0.131, 0, 0,
     0,     0,     0,     1, 0,
   ]),
+  ColorFilter.mode(Colors.red, BlendMode.color),
+  ColorFilter.mode(Colors.teal, BlendMode.color),
+  ColorFilter.mode(Colors.cyanAccent, BlendMode.color),
   ColorFilter.mode(Colors.green, BlendMode.color),
 ];

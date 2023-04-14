@@ -44,20 +44,14 @@ class HomeScreen extends StatelessWidget {
                         onTap: () {
                           Share.share(AppStrings.share_app_description.toLocalized(context));
                         },
-                        child: CircleAvatar(
-                          backgroundImage: AssetImage(ImagePath.ic_share),
-                          radius: 30,
-                        ),
+                        child: Image.asset(ImagePath.ic_share,height: 60,),
                       ),
                       SizedBox(height: 10,),
                       InkWell(
                         onTap: () {
                           launchUrl(Uri.parse("https://github.com/"));
                         },
-                        child: CircleAvatar(
-                          backgroundImage: AssetImage(ImagePath.ic_star),
-                          radius: 30,
-                        ),
+                        child: Image.asset(ImagePath.ic_star,height: 60,),
                       ),
                     ],
                   ),
@@ -69,9 +63,9 @@ class HomeScreen extends StatelessWidget {
                 decoration: BoxDecoration(
                   gradient: LinearGradient(
                     colors: [
-                      Color(0xffdf97a9),
-                      Color(0xffe4a9ad),
-                      Color(0xfff7e8c1),
+                      Color(0xff796db0),
+                      Color(0xffbc9cd4),
+                      Color(0xffdfc4cf),
                     ],
                   ),
                 ),

@@ -1,8 +1,11 @@
 import 'dart:io';
 import 'dart:ui' as ui;
 import 'package:crop_image/crop_image.dart';
+import 'package:custom_elements/custom_elements.dart';
+import 'package:dpmaker/Constants/ImagePath.dart';
 import 'package:dpmaker/Screens/FrameImageScreen.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class CropImageScreen extends StatelessWidget {
   String imagePath;
@@ -16,50 +19,90 @@ class CropImageScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text("Crop image"),
-      ),
-      body: Center(
-        child: CropImage(
-          controller: controller,
-          image: Image.file(File(imagePath)),
-          paddingSize: 25.0,
-          alwaysMove: true,
+      body: Container(
+        height: double.infinity,
+        width: double.infinity,
+        decoration: BoxDecoration(
+          image: DecorationImage(
+            image: AssetImage(ImagePath.bg_edit_image),
+            fit: BoxFit.cover,
+          ),
+        ),
+        child: Column(
+          children: [
+            Container(
+              margin: EdgeInsets.only(top: MediaQuery.of(context).padding.top),
+              height: 70,
+              color: Colors.transparent,
+              padding: EdgeInsets.symmetric(horizontal: 10,vertical: 10),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  InkWell(
+                    child: Image.asset(ImagePath.ic_back),
+                    onTap: () {
+                      Get.back();
+                    },
+                  ),
+                  InkWell(
+                    child: Image.asset(ImagePath.ic_done),
+                    onTap: () async {
+                      ui.Image img = await controller.croppedBitmap();
+                      var byteData = (await img.toByteData(format: ui.ImageByteFormat.png))!.buffer.asUint8List();
+                      Get.to(() => FrameImageScreen(imageBytes: byteData));
+                    },
+                  ),
+                ],
+              ),
+            ),
+            Expanded(
+              child: CropImage(
+                controller: controller,
+                image: Image.file(File(imagePath)),
+                paddingSize: 25.0,
+                alwaysMove: true,
+              ),
+            ),
+            _buildButtons(context),
+          ],
         ),
       ),
-      bottomNavigationBar: _buildButtons(context),
     );
   }
 
-  Widget _buildButtons(BuildContext context) => Row(
-    mainAxisAlignment: MainAxisAlignment.spaceAround,
-    crossAxisAlignment: CrossAxisAlignment.center,
-    children: [
-      IconButton(
-        icon: const Icon(Icons.close),
-        onPressed: () {
-          controller.rotation = CropRotation.up;
-          controller.crop = const Rect.fromLTRB(0.1, 0.1, 0.9, 0.9);
-          controller.aspectRatio = 1.0;
-        },
+  Widget _buildButtons(BuildContext context) => Container(
+    height: 60,
+    decoration: BoxDecoration(
+      gradient: LinearGradient(
+        colors: [
+          Color(0xff796db0),
+          Color(0xffbc9cd4),
+          Color(0xffdfc4cf),
+        ],
       ),
-      IconButton(
-        icon: const Icon(Icons.rotate_90_degrees_ccw_outlined),
-        onPressed: _rotateLeft,
-      ),
-      IconButton(
-        icon: const Icon(Icons.rotate_90_degrees_cw_outlined),
-        onPressed: _rotateRight,
-      ),
-      TextButton(
-        onPressed: () async {
-          ui.Image img = await controller.croppedBitmap();
-          var byteData = (await img.toByteData(format: ui.ImageByteFormat.png))!.buffer.asUint8List();
-          Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => FrameImageScreen(imageBytes: byteData),));
-        },
-        child: const Text('Done'),
-      ),
-    ],
+    ),
+    child: Row(
+      mainAxisAlignment: MainAxisAlignment.spaceAround,
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: [
+        IconButton(
+          icon: const Icon(Icons.close,color: CustomColors.white,),
+          onPressed: () {
+            controller.rotation = CropRotation.up;
+            controller.crop = const Rect.fromLTRB(0.1, 0.1, 0.9, 0.9);
+            controller.aspectRatio = 1.0;
+          },
+        ),
+        InkWell(
+          child: Image.asset(ImagePath.ic_rotate_left,height: 30,),
+          onTap: _rotateLeft,
+        ),
+        InkWell(
+          child: Image.asset(ImagePath.ic_rotate_right,height: 30,),
+          onTap: _rotateRight,
+        ),
+      ],
+    ),
   );
 
   Future<void> _rotateLeft() async => controller.rotateLeft();
