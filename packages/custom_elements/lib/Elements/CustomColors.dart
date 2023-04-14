@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 
 class CustomColors {
 
-  static const primary = Color(0xFFf4abc4);
-  static const primary2 = Color(0xFF595b83);
+  static const primary = Color(0xFF6b6aa8);
+  static const primary2 = Color(0xFFf4abc4);
   static const primary3 = Color(0xFF8107f4);
   // static const Color buttonColor = Color(0xFF2155CD);
   static const Color buttonColor = primary;

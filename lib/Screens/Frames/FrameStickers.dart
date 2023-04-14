@@ -1,3 +1,4 @@
+import 'package:custom_elements/custom_elements.dart';
 import 'package:dpmaker/Constants/Constants.dart';
 import 'package:dpmaker/Controllers/FrameImageController.dart';
 import 'package:flutter/material.dart';
@@ -14,10 +15,19 @@ class FrameStickers extends StatelessWidget {
           TabBar(
             controller: controller.stickerTabController,
             tabs: List.generate(controller.stickerTabController.length, (index) => Tab(
-              child: Center(child: Text(stickersList[index]['category'].toString(),maxLines: 1,style: TextStyle(color: Colors.black))),
+              child: Container(
+                padding: EdgeInsets.symmetric(vertical: 7,horizontal: 15),
+                decoration: BoxDecoration(
+                  color: CustomColors.primary,
+                  borderRadius: BorderRadius.circular(15),
+                ),
+                child: Text(stickersList[index]['category'].toString(),),
+              ),
             )),
             isScrollable: true,
+            indicatorColor: CustomColors.primary,
           ),
+          Divider(height: 1,color: CustomColors.primary,),
           Expanded(child: TabBarView(
             controller: controller.stickerTabController,
             children:  List.generate(controller.stickerTabController.length, (i) => Container(

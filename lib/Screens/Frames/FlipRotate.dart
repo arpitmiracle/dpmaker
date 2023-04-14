@@ -14,6 +14,7 @@ class FlipRotate extends StatelessWidget {
       padding: EdgeInsets.all(5.w),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
           Row(
             mainAxisSize: MainAxisSize.min,
@@ -37,27 +38,35 @@ class FlipRotate extends StatelessWidget {
           Row(
             children: [
               CustomText(text: "Rotate"),
-              Obx(() => Slider(
-                min: 0,
-                max: 8,
-                value: controller.imageRotation.value,
-                onChanged: (value) {
-                  controller.imageRotation.value = value;
-                },
-              )),
+              Expanded(
+                child: Obx(() => Slider(
+                  min: 0,
+                  max: 8,
+                  value: controller.imageRotation.value,
+                  onChanged: (value) {
+                    controller.imageRotation.value = value;
+                  },
+                  activeColor: CustomColors.primary,
+                  inactiveColor: CustomColors.primary.withOpacity(0.5),
+                )),
+              ),
             ],
           ),
           Row(
             children: [
               CustomText(text: "Resize"),
-              Obx(() => Slider(
-                min: 0,
-                max: 1,
-                value: controller.imageResize.value,
-                onChanged: (value) {
-                  controller.imageResize.value = value;
-                },
-              )),
+              Expanded(
+                child: Obx(() => Slider(
+                  min: 0,
+                  max: 1,
+                  value: controller.imageResize.value,
+                  onChanged: (value) {
+                    controller.imageResize.value = value;
+                  },
+                  activeColor: CustomColors.primary,
+                  inactiveColor: CustomColors.primary.withOpacity(0.5),
+                )),
+              ),
             ],
           ),
         ],

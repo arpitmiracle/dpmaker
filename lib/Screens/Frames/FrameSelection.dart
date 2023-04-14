@@ -1,3 +1,4 @@
+import 'package:custom_elements/custom_elements.dart';
 import 'package:dpmaker/Constants/Constants.dart';
 import 'package:dpmaker/Controllers/FrameImageController.dart';
 import 'package:flutter/material.dart';
@@ -12,13 +13,23 @@ class FrameSelection extends StatelessWidget {
     return Container(
       child: Column(
         children: [
+          Divider(height: 1,color: CustomColors.primary,),
           TabBar(
             controller: controller.frameTabController,
             tabs: List.generate(controller.frameTabController.length, (index) => Tab(
-              child: Center(child: Text(framesList[index]['category'].toString(),maxLines: 1,style: TextStyle(color: Colors.black))),
+              child: Container(
+                padding: EdgeInsets.symmetric(vertical: 7,horizontal: 15),
+                decoration: BoxDecoration(
+                  color: CustomColors.primary,
+                  borderRadius: BorderRadius.circular(15),
+                ),
+                child: Text(framesList[index]['category'].toString(),),
+              ),
             )),
             isScrollable: true,
+            indicatorColor: CustomColors.primary,
           ),
+          Divider(height: 1,color: CustomColors.primary,),
           Expanded(child: TabBarView(
             controller: controller.frameTabController,
             children:  List.generate(controller.frameTabController.length, (i) => Container(

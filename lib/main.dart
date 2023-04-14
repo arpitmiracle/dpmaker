@@ -3,6 +3,7 @@ import 'package:dpmaker/Constants/Constants.dart';
 import 'package:dpmaker/Localization/LocalizationService.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:get/get.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
 import 'Route/Routes.dart';
@@ -26,7 +27,7 @@ class MyApp extends StatelessWidget {
         return ValueListenableBuilder(
           valueListenable: currentAppLocal,
           builder: (BuildContext context, Locale value, Widget? child) {
-            return MaterialApp(
+            return GetMaterialApp(
               title: 'DP Maker',
               theme: ThemeData(
                 primarySwatch: CustomColors.swatch,

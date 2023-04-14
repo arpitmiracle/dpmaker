@@ -24,111 +24,154 @@ class FrameImageScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text("Frame image"),
-        actions: [
-          PopupMenuButton(
-            itemBuilder: (context) {
-              return [
-                PopupMenuItem(child: Text("Save as png"),value: 1),
-                PopupMenuItem(child: Text("Save as transparent png"),value: 2),
-              ];
-            },
-            icon: Icon(Icons.save_alt),
-            onSelected: (value) {
-              saveImage();
-            },
-          ),
-        ],
-      ),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Container(
-            color: Colors.grey.withOpacity(0.1),
-            padding: EdgeInsets.symmetric(vertical: 10),
-            child: Screenshot(
-              controller: screenshotController,
-              child: Center(
-                child: Container(
-                  width: 90.w,
-                  height: 90.w,
-                  child: Obx(() => Stack(
-                    children: [
-                      Transform.rotate(
-                        angle: controller.imageRotation.value,
-                        child: Obx(() => Transform.scale(
-                          scale: controller.imageResize.value,
-                          child: Transform.scale(
-                            scaleX: controller.imageFlipHorizontal.value ? 1 : -1,
-                            scaleY: controller.imageFlipVertical.value ? -1 : 1,
-                            child: Obx(() => controller.selectedColorFilter.value != null ? ClipRRect(
-                              borderRadius: BorderRadius.circular(200),
-                              child: ColorFiltered(
-                                colorFilter: controller.selectedColorFilter.value!,
-                                child: CircleAvatar(
-                                  backgroundImage: MemoryImage(imageBytes,),
-                                  radius: double.infinity,
-                                ),
-                              ),
-                            ) : CircleAvatar(
-                              backgroundImage: MemoryImage(imageBytes,),
-                              radius: double.infinity,
-                            ),)
-                          ),
-                        ),)
-                      ),
-                      Transform.rotate(
-                        angle: controller.currentRotation.value,
-                        child: Image.asset(controller.selectedFrame.value, fit: BoxFit.cover,),
-                      ),
-                      if(controller.selectedSticker.value.isNotEmpty) Center(child: Image.asset(controller.selectedSticker.value,height: 30,)),
-                    ],
-                  )),
-                ),
+            width: double.infinity,
+            decoration: BoxDecoration(
+              image: DecorationImage(
+                image: AssetImage(ImagePath.bg_edit_image2),
+                fit: BoxFit.cover,
               ),
             ),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Container(
+                  margin: EdgeInsets.only(top: MediaQuery.of(context).padding.top),
+                  height: 70,
+                  color: Colors.transparent,
+                  padding: EdgeInsets.symmetric(horizontal: 10,vertical: 10),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      InkWell(
+                        child: Image.asset(ImagePath.ic_back),
+                        onTap: () {
+                          Get.back();
+                        },
+                      ),
+                      InkWell(
+                        child: Image.asset(ImagePath.ic_download),
+                        onTap: () {
+                          saveImage();
+                        },
+                      ),
+                    ],
+                  ),
+                ),
+                Container(
+                  color: Colors.grey.withOpacity(0.1),
+                  padding: EdgeInsets.symmetric(vertical: 10),
+                  child: Screenshot(
+                    controller: screenshotController,
+                    child: Center(
+                      child: Container(
+                        width: 90.w,
+                        height: 90.w,
+                        child: Obx(() => Stack(
+                          children: [
+                            Transform.rotate(
+                                angle: controller.imageRotation.value,
+                                child: Obx(() => Transform.scale(
+                                  scale: controller.imageResize.value,
+                                  child: Transform.scale(
+                                      scaleX: controller.imageFlipHorizontal.value ? -1 : 1,
+                                      scaleY: controller.imageFlipVertical.value ? -1 : 1,
+                                      child: Obx(() => controller.selectedColorFilter.value != null ? ClipRRect(
+                                        borderRadius: BorderRadius.circular(200),
+                                        child: ColorFiltered(
+                                          colorFilter: controller.selectedColorFilter.value!,
+                                          child: CircleAvatar(
+                                            backgroundImage: MemoryImage(imageBytes,),
+                                            radius: double.infinity,
+                                          ),
+                                        ),
+                                      ) : CircleAvatar(
+                                        backgroundImage: MemoryImage(imageBytes,),
+                                        radius: double.infinity,
+                                      ),)
+                                  ),
+                                ),)
+                            ),
+                            Transform.rotate(
+                              angle: controller.currentRotation.value,
+                              child: Image.asset(controller.selectedFrame.value, fit: BoxFit.cover,),
+                            ),
+                            if(controller.selectedSticker.value.isNotEmpty) Center(child: Image.asset(controller.selectedSticker.value,height: 30,)),
+                          ],
+                        )),
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
           ),
-          Obx(() => Slider(
-            min: 0,
-            max: 8,
-            value: controller.currentRotation.value,
-            onChanged: (value) {
-              controller.currentRotation.value = value;
-            },
-          )),
-
-          Expanded(child: TabBarView(
-            controller: controller.tabController,
-            children: [
-              FrameSelection(),
-              FrameFilter(),
-              FlipRotate(),
-              FrameStickers(),
-              Container(),
-            ],
-          )),
-          TabBar(
-            controller: controller.tabController,
-            tabs: [
-              Tab(
-                child: Image.asset(ImagePath.ic_photos),
+          Expanded(
+            child: Container(
+              width: double.infinity,
+              decoration: BoxDecoration(
+                image: DecorationImage(
+                  image: AssetImage(ImagePath.bg_edit_image),
+                  fit: BoxFit.cover,
+                ),
               ),
-              Tab(
-                icon: Icon(Icons.circle,color: Colors.black),
+              child: Column(
+                children: [
+                  GetBuilder<FrameImageController>(builder: (c) {
+                    return controller.tabController.index == 2 ? Obx(() => Slider(
+                      min: 0,
+                      max: 8,
+                      value: controller.currentRotation.value,
+                      onChanged: (value) {
+                        controller.currentRotation.value = value;
+                      },
+                      activeColor: CustomColors.primary,
+                      inactiveColor: CustomColors.primary.withOpacity(0.5),
+                    )) : Container();
+                  },),
+                  Expanded(child: TabBarView(
+                    controller: controller.tabController,
+                    physics: NeverScrollableScrollPhysics(),
+                    children: [
+                      FrameFilter(),
+                      FlipRotate(),
+                      FrameSelection(),
+                      FrameStickers(),
+                      Container(),
+                    ],
+                  )),
+                  Divider(height: 1,color: CustomColors.primary,),
+                  GetBuilder<FrameImageController>(builder: (controller) {
+                    return TabBar(
+                      controller: controller.tabController,
+                      tabs: [
+                        Tab(
+                          child: Image.asset(ImagePath.ic_filters,color: controller.tabController.index == 0 ? CustomColors.primary : CustomColors.black,),
+                        ),
+                        Tab(
+                          child: Image.asset(ImagePath.ic_rotate_flip,color: controller.tabController.index == 1 ? CustomColors.primary : CustomColors.black,),
+                        ),
+                        Tab(
+                          child: Image.asset(ImagePath.ic_frames,color: controller.tabController.index == 2 ? CustomColors.primary : CustomColors.black,),
+                        ),
+                        Tab(
+                          child: Image.asset(ImagePath.ic_emoji,color: controller.tabController.index == 3 ? CustomColors.primary : CustomColors.black,),
+                        ),
+                        Tab(
+                          child: Image.asset(ImagePath.ic_text,color: controller.tabController.index == 4 ? CustomColors.primary : CustomColors.black,),
+                        ),
+                      ],
+                      indicatorColor: CustomColors.primary,
+                      onTap: (value) => controller.update(),
+                    );
+                  },)
+                ],
               ),
-              Tab(
-                icon: Icon(Icons.photo,color: Colors.black),
-              ),
-              Tab(
-                icon: Icon(Icons.person,color: Colors.black),
-              ),
-              Tab(
-                icon: Icon(Icons.text_fields,color: Colors.black),
-              ),
-            ],
-            indicatorColor: CustomColors.primary,
-          ),
+            ),
+          )
         ],
       ),
     );
