@@ -3,6 +3,7 @@ import 'package:dpmaker/Constants/Constants.dart';
 import 'package:dpmaker/Controllers/FrameImageController.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:sticker_view/stickerview.dart';
 
 class FrameStickers extends StatelessWidget {
   FrameImageController controller = Get.find();
@@ -42,7 +43,9 @@ class FrameStickers extends StatelessWidget {
                 itemBuilder: (context, index) {
                   return InkWell(
                     onTap: () {
-                      controller.selectedSticker.value = stickersList[i]['stickers'][index];
+                      // controller.selectedSticker.value = stickersList[i]['stickers'][index];
+                      controller.stickerList.add(Sticker(id: "Sticker$index",child: Container(height: 40,width: 40,child: Center(child: Image.asset(stickersList[i]['stickers'][index],fit: BoxFit.cover,))),));
+                      controller.update();
                     },
                     child: Image.asset(stickersList[i]['stickers'][index]),
                   );

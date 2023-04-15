@@ -2,6 +2,7 @@ import 'package:dpmaker/Constants/Constants.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:sticker_view/stickerview.dart';
 
 class FrameImageController extends GetxController with GetTickerProviderStateMixin {
   RxDouble currentRotation = 0.0.obs;
@@ -15,6 +16,7 @@ class FrameImageController extends GetxController with GetTickerProviderStateMix
   RxString selectedFrame = (framesList.first['frames'][6].toString()).obs;
   RxString selectedSticker = "".obs;
   Rx<ColorFilter?> selectedColorFilter = (null as ColorFilter?).obs;
+  List<Sticker> stickerList = <Sticker>[];
 
   @override
   void onInit() {

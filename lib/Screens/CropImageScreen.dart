@@ -49,7 +49,7 @@ class CropImageScreen extends StatelessWidget {
                     onTap: () async {
                       ui.Image img = await controller.croppedBitmap();
                       var byteData = (await img.toByteData(format: ui.ImageByteFormat.png))!.buffer.asUint8List();
-                      Get.to(() => FrameImageScreen(imageBytes: byteData));
+                      Get.off(() => FrameImageScreen(imageBytes: byteData));
                     },
                   ),
                 ],

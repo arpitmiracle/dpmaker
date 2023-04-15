@@ -1,7 +1,3 @@
-import 'dart:io';
-import 'dart:typed_data';
-import 'dart:ui' as ui;
-import 'package:crop_image/crop_image.dart';
 import 'package:custom_elements/custom_elements.dart';
 import 'package:document_file_save_plus/document_file_save_plus.dart';
 import 'package:dpmaker/Constants/ImagePath.dart';
@@ -9,7 +5,7 @@ import 'package:dpmaker/Controllers/FrameImageController.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:screenshot/screenshot.dart';
-
+import 'package:sticker_view/draggable_stickers.dart';
 import 'Frames/FlipRotate.dart';
 import 'Frames/FrameFilters.dart';
 import 'Frames/FrameStickers.dart';
@@ -100,6 +96,15 @@ class FrameImageScreen extends StatelessWidget {
                               child: Image.asset(controller.selectedFrame.value, fit: BoxFit.cover,),
                             ),
                             if(controller.selectedSticker.value.isNotEmpty) Center(child: Image.asset(controller.selectedSticker.value,height: 30,)),
+                            Center(
+                              child: GetBuilder<FrameImageController>(
+                                builder: (controller) {
+                                  return controller.stickerList.isEmpty ? Container() : DraggableStickers(
+                                    stickerList: controller.stickerList,
+                                  );
+                                },
+                              ),
+                            ),
                           ],
                         )),
                       ),
