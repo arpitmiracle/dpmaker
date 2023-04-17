@@ -3,6 +3,7 @@ import 'package:custom_elements/custom_elements.dart';
 import 'package:document_file_save_plus/document_file_save_plus.dart';
 import 'package:dpmaker/Constants/ImagePath.dart';
 import 'package:dpmaker/Controllers/FrameImageController.dart';
+import 'package:dpmaker/Utils/Utils.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:screenshot/screenshot.dart';
@@ -209,7 +210,8 @@ class FrameImageScreen extends StatelessWidget {
         .capture(delay: Duration(milliseconds: 10))
         .then((capturedImage) async {
       //Save single image file
-      DocumentFileSavePlus().saveFile(capturedImage!, "DP_${DateTime.now()}.png", "image/png");
+      await DocumentFileSavePlus().saveFile(capturedImage!, "DP_Maker${DateTime.now()}.png", "image/png");
+      Utils.showToast("DP saved successfully!");
     }).catchError((onError) {
       print(onError);
     });

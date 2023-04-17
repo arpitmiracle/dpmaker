@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:dpmaker/Constants/Constants.dart';
 import 'package:dpmaker/Localization/AppStrings.dart';
+import 'package:dpmaker/Utils/AdsHelper.dart';
 import 'package:dpmaker/Utils/Extentions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -18,8 +19,30 @@ class Utils {
   );
  }
 
- static bool isValidEmail(String? value) => RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+").hasMatch(value ?? '');
- static bool isValidPhoneNumber(String? value) => RegExp(r'(^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$)').hasMatch(value ?? '');
+ static List<File> fetchAllMedia() {
+  List<File> photos = [];
+  try {
+   List<File?> tmpphotos = Directory('/storage/emulated/0/Download')
+       .listSync()
+       .map((e) => (e.path.contains("DP_Maker") ? e as File : null))
+       .toList();
+   tmpphotos.removeWhere((element) => element == null);
+
+   for(int i=0; i<tmpphotos.length; i++){
+    photos.add(tmpphotos[i]!);
+   }
+
+   photos
+       .sort((a, b) => b.lastModifiedSync().compareTo(a.lastModifiedSync()));
+
+   return photos;
+  } catch (e) {
+   print(e.toString());
+   photos = <File>[];
+   return photos;
+  }
+
+ }
 
  static Future<bool> isInternetConnected()async{
   try {

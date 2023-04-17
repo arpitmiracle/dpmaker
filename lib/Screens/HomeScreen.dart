@@ -13,6 +13,8 @@ import 'package:dpmaker/Utils/Utils.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:url_launcher/url_launcher.dart';
 
+import 'MyAlbumScreen.dart';
+
 
 class HomeScreen extends StatelessWidget {
   final ImagePicker _picker = ImagePicker();
@@ -81,7 +83,7 @@ class HomeScreen extends StatelessWidget {
                     SizedBox(width: 10.w,),
                     InkWell(
                       onTap: () {
-
+                        Navigator.push(context, MaterialPageRoute(builder: (context) => MyAlbumScreen(),));
                       },
                       child: Image.asset(ImagePath.ic_my_album,height: 50,),
                     ),
