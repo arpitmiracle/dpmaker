@@ -1,3 +1,4 @@
+import 'dart:math';
 import 'package:custom_elements/custom_elements.dart';
 import 'package:document_file_save_plus/document_file_save_plus.dart';
 import 'package:dpmaker/Constants/ImagePath.dart';
@@ -6,9 +7,11 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:screenshot/screenshot.dart';
 import 'package:sticker_view/draggable_stickers.dart';
+import 'package:sticker_view/stickerview.dart';
 import 'Frames/FlipRotate.dart';
 import 'Frames/FrameFilters.dart';
 import 'Frames/FrameStickers.dart';
+import 'Frames/FrameText.dart';
 import 'Frames/frameSelection.dart';
 
 class FrameImageScreen extends StatelessWidget {
@@ -101,6 +104,15 @@ class FrameImageScreen extends StatelessWidget {
                                 builder: (controller) {
                                   return controller.stickerList.isEmpty ? Container() : DraggableStickers(
                                     stickerList: controller.stickerList,
+                                    onEdit: (stkr) async {
+                                      if(stkr.isText == true){
+                                        TextData? data = await Navigator.push(context, MaterialPageRoute(builder: (context) => FrameText(stickerText: stkr.child as CustomText?),));
+                                        if(data != null) {
+                                          controller.stickerList[controller.stickerList.indexWhere((element) => element.id == stkr.id)] = Sticker(id: stkr.id,isText: true,child: CustomText(text: data.text,color: data.color,fontFamily: data.font,fontSize: 18),);
+                                          controller.update();
+                                        }
+                                      }
+                                    },
                                   );
                                 },
                               ),
@@ -170,7 +182,17 @@ class FrameImageScreen extends StatelessWidget {
                         ),
                       ],
                       indicatorColor: CustomColors.primary,
-                      onTap: (value) => controller.update(),
+                      onTap: (value) async {
+                        if(value == 4){
+                          controller.tabController.animateTo(controller.tabController.previousIndex);
+                          TextData? data = await Navigator.push(context, MaterialPageRoute(builder: (context) => FrameText(),));
+                          if(data != null) {
+                            controller.stickerList.add(Sticker(id: "Text${DateTime.now().hashCode}",isText: true,child: CustomText(text: data.text,color: data.color,fontFamily: data.font,fontSize: 18),));
+                            controller.update();
+                          }
+                        }
+                        controller.update();
+                      },
                     );
                   },)
                 ],

@@ -22,6 +22,9 @@ bool checkResponse(int? code){
   return code == 200 ? true : false;
 }
 
+List fontsList = List.generate(41, (index) => "style${index + 1}");
+List colorsList = Colors.primaries;
+
 List framesList = [
   {
     "category" : "Basic",

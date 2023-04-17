@@ -7,6 +7,7 @@ class CustomTextField extends StatelessWidget {
         required this.controller,
         this.radius = 10,
         this.keyboardType,
+        this.fontColor,
         this.borderColor = CustomColors.borderColor,
         this.fillColor =    CustomColors.textFieldColor,
         this.boderWidth = 1,
@@ -25,11 +26,13 @@ class CustomTextField extends StatelessWidget {
         this.height,
         this.errorTextStyle,
         this.border,
+        this.fontFamily,
         this.filled = false,
       });
 
   final TextEditingController controller;
   double radius;
+  Color? fontColor;
   Color borderColor;
   bool displayError;
   Color fillColor;
@@ -52,6 +55,7 @@ class CustomTextField extends StatelessWidget {
   String? Function(String?)? validator;
   InputBorder? border;
   bool filled;
+  String? fontFamily;
 
   @override
   Widget build(BuildContext context) {
@@ -60,7 +64,7 @@ class CustomTextField extends StatelessWidget {
       child: SizedBox(
         height: height,
         child: TextFormField(
-          style: CustomStyles.textStyle(fontSize: fontSize),
+          style: CustomStyles.textStyle(fontSize: fontSize,fontFamily: fontFamily,fontColor: fontColor),
           controller: controller,
           expands: false,
           inputFormatters: inputFormatter,

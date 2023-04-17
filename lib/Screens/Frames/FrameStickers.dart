@@ -44,7 +44,7 @@ class FrameStickers extends StatelessWidget {
                   return InkWell(
                     onTap: () {
                       // controller.selectedSticker.value = stickersList[i]['stickers'][index];
-                      controller.stickerList.add(Sticker(id: "Sticker$index",child: Container(height: 40,width: 40,child: Center(child: Image.asset(stickersList[i]['stickers'][index],fit: BoxFit.cover,))),));
+                      controller.stickerList.add(Sticker(id: "Sticker$index${DateTime.now().hashCode}",child: Container(height: 40,width: 40,child: Center(child: Image.asset(stickersList[i]['stickers'][index],fit: BoxFit.cover,))),));
                       controller.update();
                     },
                     child: Image.asset(stickersList[i]['stickers'][index]),

@@ -54,6 +54,7 @@ dependencies:
   document_file_save_plus: ^2.0.0
   get: ^4.6.5
   sticker_view:
+    path: packages/sticker_view
 
 dev_dependencies:
   flutter_test:
@@ -113,17 +114,130 @@ flutter:
   # "family" key with the font family name, and a "fonts" key with a
   # list giving the asset and other descriptors for the font. For
   # example:
-  # fonts:
-  #   - family: Schyler
-  #     fonts:
-  #       - asset: fonts/Schyler-Regular.ttf
-  #       - asset: fonts/Schyler-Italic.ttf
-  #         style: italic
-  #   - family: Trajan Pro
-  #     fonts:
-  #       - asset: fonts/TrajanPro.ttf
-  #       - asset: fonts/TrajanPro_Bold.ttf
-  #         weight: 700
-  #
+  fonts:
+    - family: style1
+      fonts:
+        - asset: assets/fonts/style1.ttf
+    - family: style2
+      fonts:
+        - asset: assets/fonts/style2.ttf
+    - family: style3
+      fonts:
+        - asset: assets/fonts/style3.ttf
+    - family: style4
+      fonts:
+        - asset: assets/fonts/style4.ttf
+    - family: style5
+      fonts:
+        - asset: assets/fonts/style5.ttf
+    - family: style6
+      fonts:
+        - asset: assets/fonts/style6.ttf
+    - family: style7
+      fonts:
+        - asset: assets/fonts/style7.ttf
+    - family: style8
+      fonts:
+        - asset: assets/fonts/style8.ttf
+    - family: style9
+      fonts:
+        - asset: assets/fonts/style9.ttf
+    - family: style10
+      fonts:
+        - asset: assets/fonts/style10.ttf
+    - family: style11
+      fonts:
+        - asset: assets/fonts/style11.ttf
+    - family: style12
+      fonts:
+        - asset: assets/fonts/style12.ttf
+    - family: style13
+      fonts:
+        - asset: assets/fonts/style13.ttf
+    - family: style14
+      fonts:
+        - asset: assets/fonts/style14.ttf
+    - family: style15
+      fonts:
+        - asset: assets/fonts/style15.ttf
+    - family: style16
+      fonts:
+        - asset: assets/fonts/style16.ttf
+    - family: style17
+      fonts:
+        - asset: assets/fonts/style17.ttf
+    - family: style18
+      fonts:
+        - asset: assets/fonts/style18.ttf
+    - family: style19
+      fonts:
+        - asset: assets/fonts/style19.ttf
+    - family: style20
+      fonts:
+        - asset: assets/fonts/style20.ttf
+    - family: style21
+      fonts:
+        - asset: assets/fonts/style21.ttf
+    - family: style22
+      fonts:
+        - asset: assets/fonts/style22.ttf
+    - family: style23
+      fonts:
+        - asset: assets/fonts/style23.otf
+    - family: style24
+      fonts:
+        - asset: assets/fonts/style24.ttf
+    - family: style25
+      fonts:
+        - asset: assets/fonts/style25.ttf
+    - family: style26
+      fonts:
+        - asset: assets/fonts/style26.otf
+    - family: style27
+      fonts:
+        - asset: assets/fonts/style27.ttf
+    - family: style28
+      fonts:
+        - asset: assets/fonts/style28.ttf
+    - family: style29
+      fonts:
+        - asset: assets/fonts/style29.ttf
+    - family: style30
+      fonts:
+        - asset: assets/fonts/style30.ttf
+    - family: style31
+      fonts:
+        - asset: assets/fonts/style31.ttf
+    - family: style32
+      fonts:
+        - asset: assets/fonts/style32.ttf
+    - family: style33
+      fonts:
+        - asset: assets/fonts/style33.ttf
+    - family: style34
+      fonts:
+        - asset: assets/fonts/style34.ttf
+    - family: style35
+      fonts:
+        - asset: assets/fonts/style35.ttf
+    - family: style36
+      fonts:
+        - asset: assets/fonts/style36.ttf
+    - family: style37
+      fonts:
+        - asset: assets/fonts/style37.ttf
+    - family: style38
+      fonts:
+        - asset: assets/fonts/style38.ttf
+    - family: style39
+      fonts:
+        - asset: assets/fonts/style39.ttf
+    - family: style40
+      fonts:
+        - asset: assets/fonts/style40.ttf
+    - family: style41
+      fonts:
+        - asset: assets/fonts/style41.ttf
+
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages

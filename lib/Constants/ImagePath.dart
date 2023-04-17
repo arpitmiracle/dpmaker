@@ -25,5 +25,7 @@ class ImagePath {
   static const ic_done = 'assets/icons/ic_done.png';
   static const ic_rotate_right = 'assets/icons/ic_rotate_right.png';
   static const ic_rotate_left = 'assets/icons/ic_rotate_left.png';
+  static const ic_fonts = 'assets/icons/ic_fonts.png';
+  static const ic_color = 'assets/icons/ic_color.png';
 
 }

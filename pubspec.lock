@@ -556,10 +556,9 @@ packages:
   sticker_view:
     dependency: "direct main"
     description:
-      name: sticker_view
-      sha256: "75df513ac06c8922cecb27e40b66e21bf3acaec47edd0d6fb7b62c6db1a45dc5"
-      url: "https://pub.dev"
-    source: hosted
+      path: "packages/sticker_view"
+      relative: true
+    source: path
     version: "0.0.2"
   stream_channel:
     dependency: transitive
