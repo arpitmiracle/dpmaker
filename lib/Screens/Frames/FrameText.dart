@@ -155,7 +155,7 @@ class _FrameTextState extends State<FrameText> with SingleTickerProviderStateMix
     return GridView.builder(
       itemCount: colorsList.length,
       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-        crossAxisCount: 4,
+        crossAxisCount: 5,
         mainAxisSpacing: 10,
         crossAxisSpacing: 10,
       ),
