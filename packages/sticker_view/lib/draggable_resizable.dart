@@ -231,7 +231,7 @@ class _DraggableResizableState extends State<DraggableResizable> {
             decoration: BoxDecoration(
               border: Border.all(
                 width: 2,
-                color: widget.canTransform ? Colors.blue : Colors.transparent,
+                color: widget.canTransform ? Color(0xFF6b6aa8) : Colors.transparent,
               ),
             ),
             child: Center(child: widget.child),
@@ -467,7 +467,7 @@ class _ResizePoint extends StatelessWidget {
                 ? Icon(
                     iconData,
                     size: 12,
-                    color: Colors.blue,
+                    color: Color(0xFF6b6aa8),
                   )
                 : Container(),
           ),
@@ -579,7 +579,7 @@ class _FloatingActionIcon extends StatelessWidget {
           child: Center(
             child: Icon(
               iconData,
-              color: Colors.blue,
+              color: Color(0xFF6b6aa8),
               size: 12,
             ),
           ),
