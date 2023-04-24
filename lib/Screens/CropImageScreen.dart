@@ -4,6 +4,7 @@ import 'package:crop_image/crop_image.dart';
 import 'package:custom_elements/custom_elements.dart';
 import 'package:dpmaker/Constants/ImagePath.dart';
 import 'package:dpmaker/Screens/FrameImageScreen.dart';
+import 'package:dpmaker/Utils/Utils.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -47,9 +48,16 @@ class CropImageScreen extends StatelessWidget {
                   InkWell(
                     child: Image.asset(ImagePath.ic_done),
                     onTap: () async {
-                      ui.Image img = await controller.croppedBitmap();
-                      var byteData = (await img.toByteData(format: ui.ImageByteFormat.png))!.buffer.asUint8List();
-                      Get.off(() => FrameImageScreen(imageBytes: byteData));
+                      CustomProgressBar progressBar = CustomProgressBar();
+                      progressBar.show(context);
+                      try{
+                        ui.Image img = await controller.croppedBitmap();
+                        var byteData = (await img.toByteData(format: ui.ImageByteFormat.png))!.buffer.asUint8List();
+                        Get.off(() => FrameImageScreen(imageBytes: byteData));
+                      } catch (e){} finally {
+                        progressBar.hide();
+                      }
+
                     },
                   ),
                 ],

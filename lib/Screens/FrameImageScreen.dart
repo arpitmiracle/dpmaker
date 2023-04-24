@@ -107,9 +107,9 @@ class FrameImageScreen extends StatelessWidget {
                                     stickerList: controller.stickerList,
                                     onEdit: (stkr) async {
                                       if(stkr.isText == true){
-                                        TextData? data = await Navigator.push(context, MaterialPageRoute(builder: (context) => FrameText(stickerText: stkr.child as CustomText?),));
+                                        TextData? data = await Navigator.push(context, MaterialPageRoute(builder: (context) => FrameText(stickerText: stkr.child as TextWidth?),));
                                         if(data != null) {
-                                          controller.stickerList[controller.stickerList.indexWhere((element) => element.id == stkr.id)] = Sticker(id: stkr.id,isText: true,child: CustomText(text: data.text,color: data.color,fontFamily: data.font,fontSize: 18),);
+                                          controller.stickerList[controller.stickerList.indexWhere((element) => element.id == stkr.id)] = Sticker(id: stkr.id,isText: true,child: TextWidth(selectedFrame: data.frame,text: data.text,style: TextStyle(color: data.color,fontFamily: data.font)),);
                                           controller.update();
                                         }
                                       }
@@ -188,7 +188,7 @@ class FrameImageScreen extends StatelessWidget {
                           controller.tabController.animateTo(controller.tabController.previousIndex);
                           TextData? data = await Navigator.push(context, MaterialPageRoute(builder: (context) => FrameText(),));
                           if(data != null) {
-                            controller.stickerList.add(Sticker(id: "Text${DateTime.now().hashCode}",isText: true,child: CustomText(text: data.text,color: data.color,fontFamily: data.font,fontSize: 18),));
+                            controller.stickerList.add(Sticker(id: "Text${DateTime.now().hashCode}",isText: true,child: TextWidth(selectedFrame: data.frame,text: data.text,style: TextStyle(color: data.color,fontFamily: data.font)),));
                             controller.update();
                           }
                         }

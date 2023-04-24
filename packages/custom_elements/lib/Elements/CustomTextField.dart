@@ -26,7 +26,9 @@ class CustomTextField extends StatelessWidget {
         this.height,
         this.errorTextStyle,
         this.border,
+        this.maxLines,
         this.fontFamily,
+        this.textInputAction,
         this.filled = false,
       });
 
@@ -56,6 +58,7 @@ class CustomTextField extends StatelessWidget {
   InputBorder? border;
   bool filled;
   String? fontFamily;
+  TextInputAction? textInputAction;
 
   @override
   Widget build(BuildContext context) {
@@ -69,6 +72,7 @@ class CustomTextField extends StatelessWidget {
           expands: false,
           inputFormatters: inputFormatter,
           maxLines: maxLines ?? 1,
+          textInputAction: textInputAction,
           onChanged: onChange,
           enabled: enabled,
           keyboardType: keyboardType,
