@@ -1,4 +1,5 @@
 
+import 'package:custom_elements/custom_elements.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_native_ad/flutter_native_ad.dart';
 
@@ -74,16 +75,20 @@ class AdsHelper {
   static int adCount = 1;
   static int maxAdCount = 4;
 
-  static showInterstitialAd()async{
-    adCount++;
-    if(adCount >= maxAdCount){
-      isInterstitialAdReady ? await interstitialAd.interstitialAd?.show() : null;
-      adCount = 1;
-      await loadInterstitialAd();
+  static showInterstitialAd({bool ignoreCount = false})async{
+    if(ignoreCount){
+     return isInterstitialAdReady ? await interstitialAd.interstitialAd?.show() : null;
+    } else {
+      adCount++;
+      if(adCount >= maxAdCount){
+        isInterstitialAdReady ? await interstitialAd.interstitialAd?.show() : null;
+        adCount = 1;
+        await loadInterstitialAd();
+      }
     }
   }
 
-  static loadInterstitialAd() async{
+  static loadInterstitialAd({bool ignoreCount = false}) async{
     interstitialAd = FlutterInterstitialAd();
     await interstitialAd.loadInterstitialAd(adUnitId:googleInterstitialAdID,onAdLoaded: (ad) {
       interstitialAd.interstitialAd = ad;
@@ -142,5 +147,19 @@ class AdsHelper {
     );
   }
 
+
+  static loadAndShowInterstitialPremium(BuildContext context, {VoidCallback? onDone})async{
+    CustomProgressBar progressBar = CustomProgressBar();
+    progressBar.show(context);
+    interstitialAd = FlutterInterstitialAd();
+    await interstitialAd.loadInterstitialAd(adUnitId:googleInterstitialAdID,onAdLoaded: (ad) async {
+      interstitialAd.interstitialAd = ad;
+      progressBar.hide();
+      await ad.show();
+      onDone?.call();
+    }, onAdFailedToLoad: (err) {
+      progressBar.hide();
+    },);
+  }
 
 }

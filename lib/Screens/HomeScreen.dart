@@ -7,14 +7,12 @@ import 'package:dpmaker/Constants/IconPath.dart';
 import 'package:dpmaker/Constants/ImagePath.dart';
 import 'package:dpmaker/Localization/AppStrings.dart';
 import 'package:dpmaker/Route/Routes.dart';
-import 'package:dpmaker/Constants/DialogSelectType.dart';
 import 'package:dpmaker/Utils/Extentions.dart';
 import 'package:dpmaker/Utils/Utils.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import 'MyAlbumScreen.dart';
-
 
 class HomeScreen extends StatelessWidget {
   final ImagePicker _picker = ImagePicker();

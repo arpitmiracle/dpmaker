@@ -4,6 +4,8 @@ import 'package:custom_elements/Elements/CustomColors.dart';
 import 'package:dpmaker/Constants/Constants.dart';
 import 'package:dpmaker/Constants/ImagePath.dart';
 import 'package:dpmaker/Controllers/FrameImageController.dart';
+import 'package:dpmaker/Utils/AdsHelper.dart';
+import 'package:dpmaker/Utils/DialogHelper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart' show ViewportOffset;
 import 'package:get/get.dart';
@@ -25,7 +27,16 @@ class FrameFilter extends StatelessWidget {
       itemBuilder: (context, index) {
         return InkWell(
           onTap: () {
-            controller.selectedColorFilter.value = filtersList[index];
+            if(index > 2){
+              DialogHelper.AdConfirmationDialog(context,title: "Want to use filter?",desc: "To use this filter, watch ad first. It's worth it!",onYes: () async {
+                await AdsHelper.loadAndShowInterstitialPremium(context,onDone: () {
+                  controller.selectedColorFilter.value = filtersList[index];
+                },);
+              },);
+            } else {
+              controller.selectedColorFilter.value = filtersList[index];
+            }
+
           },
           child: Stack(
             children: [
@@ -39,7 +50,8 @@ class FrameFilter extends StatelessWidget {
                   ),
                 ),
               ),
-              Obx(() => (controller.selectedColorFilter.value == filtersList[index]) ? Center(child: Icon(Icons.done,color: CustomColors.white,),) : SizedBox())
+              Obx(() => (controller.selectedColorFilter.value == filtersList[index]) ? Center(child: Icon(Icons.done,color: CustomColors.white,),) : (index > 2) ? Center(child: Icon(Icons.lock,color: CustomColors.white,),) : SizedBox())
+
             ],
           ),
         );

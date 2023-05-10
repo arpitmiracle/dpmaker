@@ -1,6 +1,8 @@
 import 'package:custom_elements/custom_elements.dart';
 import 'package:dpmaker/Constants/Constants.dart';
 import 'package:dpmaker/Controllers/FrameImageController.dart';
+import 'package:dpmaker/Utils/AdsHelper.dart';
+import 'package:dpmaker/Utils/DialogHelper.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -43,13 +45,21 @@ class FrameSelection extends StatelessWidget {
                 padding: EdgeInsets.all(10),
                 itemBuilder: (context, index) {
                   return InkWell(
-                    onTap: () {
-                      controller.selectedFrame.value = framesList[i]['frames'][index];
+                    onTap: () async {
+                      if(index > 2){
+                        DialogHelper.AdConfirmationDialog(context,title: "Want to use frame?",desc: "To use this frame, watch ad first. It's worth it!",onYes: () async {
+                          await AdsHelper.loadAndShowInterstitialPremium(context,onDone: () {
+                            controller.selectedFrame.value = framesList[i]['frames'][index];
+                          },);
+                        },);
+                      } else {
+                        controller.selectedFrame.value = framesList[i]['frames'][index];
+                      }
                     },
                     child: Stack(
                       children: [
                         framesList[i]['frames'][index].toString().isEmpty ? Container() : Image.asset(framesList[i]['frames'][index]),
-                        Obx(() => (controller.selectedFrame.value == framesList[i]['frames'][index]) ? Center(child: Icon(Icons.done),) : SizedBox())
+                        Obx(() => (controller.selectedFrame.value == framesList[i]['frames'][index]) ? Center(child: Icon(Icons.done),) : (index > 2) ? Center(child: Icon(Icons.lock,),) : SizedBox())
                       ],
                     ),
                   );

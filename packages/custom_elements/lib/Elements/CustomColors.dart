@@ -15,6 +15,7 @@ class CustomColors {
   static const subtitle = Colors.black54;
   static const text = Colors.black45;
   static const pink = Colors.pink;
+  static const red = Colors.red;
   static const grey = Colors.grey;
   static const green = Colors.green;
   static const transparent = Colors.transparent;

@@ -1,6 +1,8 @@
 import 'package:custom_elements/custom_elements.dart';
 import 'package:dpmaker/Constants/Constants.dart';
 import 'package:dpmaker/Controllers/FrameImageController.dart';
+import 'package:dpmaker/Utils/AdsHelper.dart';
+import 'package:dpmaker/Utils/DialogHelper.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sticker_view/stickerview.dart';
@@ -42,12 +44,25 @@ class FrameStickers extends StatelessWidget {
                 padding: EdgeInsets.all(10),
                 itemBuilder: (context, index) {
                   return InkWell(
-                    onTap: () {
-                      // controller.selectedSticker.value = stickersList[i]['stickers'][index];
-                      controller.stickerList.add(Sticker(id: "Sticker$index${DateTime.now().hashCode}",child: Container(height: 40,width: 40,child: Center(child: Image.asset(stickersList[i]['stickers'][index],fit: BoxFit.cover,))),));
-                      controller.update();
+                    onTap: () async {
+                      if(index > 2){
+                        DialogHelper.AdConfirmationDialog(context,title: "Want to use sticker?",desc: "To use this sticker, watch ad first. It's worth it!",onYes: () async {
+                          await AdsHelper.loadAndShowInterstitialPremium(context,onDone: () {
+                            controller.stickerList.add(Sticker(id: "Sticker$index${DateTime.now().hashCode}",child: Container(height: 40,width: 40,child: Center(child: Image.asset(stickersList[i]['stickers'][index],fit: BoxFit.cover,))),));
+                            controller.update();
+                          },);
+                        },);
+                      } else {
+                        controller.stickerList.add(Sticker(id: "Sticker$index${DateTime.now().hashCode}",child: Container(height: 40,width: 40,child: Center(child: Image.asset(stickersList[i]['stickers'][index],fit: BoxFit.cover,))),));
+                        controller.update();
+                      }
                     },
-                    child: Image.asset(stickersList[i]['stickers'][index]),
+                    child: Stack(
+                      children: [
+                        Image.asset(stickersList[i]['stickers'][index]),
+                        if(index > 2) Center(child: Icon(Icons.lock,),),
+                      ],
+                    ),
                   );
                 },
               ),
