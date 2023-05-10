@@ -36,7 +36,6 @@ class FrameFilter extends StatelessWidget {
             } else {
               controller.selectedColorFilter.value = filtersList[index];
             }
-
           },
           child: Stack(
             children: [

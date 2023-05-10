@@ -7,8 +7,11 @@ class AdsHelper {
 
   static String googleOpenAdID = "ca-app-pub-3940256099942544/3419835294";
   static String googleBannerAdID = "ca-app-pub-3940256099942544/6300978111";
+  // static String googleBannerAdID = "ca-app-pub-3974815580615835/4959004016";
   static String googleInterstitialAdID = "ca-app-pub-3940256099942544/1033173712";
+  // static String googleInterstitialAdID = "ca-app-pub-3974815580615835/9615147756";
   static String googleMediumNativeAdID = "ca-app-pub-3940256099942544/2247696110";
+  // static String googleMediumNativeAdID = "ca-app-pub-3974815580615835/7014052219";
 
   static var adOpenAd = FlutterAdOpenAd();
   static bool isAppOpenAdAdReady = false;
@@ -28,19 +31,23 @@ class AdsHelper {
     isAppOpenAdAdReady ? await adOpenAd.appOpenAd?.show() : null;
   }
 
+
   ValueNotifier bannerAdNotifier = ValueNotifier(null);
 
-  loadBannerGoogleAd()async{
+  loadBannerAd()async{
     bannerAdNotifier.value = null;
     var ad = FlutterBannerAd();
-    await ad.loadBannerAd(adUnitId: googleBannerAdID,onAdLoaded: (_) {
-    }, onAdFailedToLoad: (ad, err) {
-      print('Failed to load a banner ad: ${err.message}');
-      ad.dispose();
-    });
-    Future.delayed(Duration(milliseconds: 500),() {
-      bannerAdNotifier.value = ad;
-    },);
+    await ad.loadBannerAd(
+        adUnitId: googleBannerAdID,
+        onAdLoaded: (_) {
+          Future.delayed(Duration(milliseconds: 500),() {
+            bannerAdNotifier.value = ad;
+          },);
+        },
+        onAdFailedToLoad: (ad, err) {
+          print('Failed to load a banner ad: ${err.message}');
+          ad.dispose();
+        });
   }
 
   Widget showBannerAd(){
@@ -124,7 +131,8 @@ class AdsHelper {
         builder: (context,value,child) {
           return (value is FlutterNativeAd) ? Builder(
               builder: (context) {
-                return ValueListenableBuilder<bool>(valueListenable: isNativeMediumLoadedNotifier,
+                return ValueListenableBuilder<bool>(
+                  valueListenable: isNativeMediumLoadedNotifier,
                   builder: (context, val, child) {
                     return val == true ? Align(
                         alignment: Alignment.bottomCenter,
@@ -139,14 +147,13 @@ class AdsHelper {
                               height: height,
                               child: value.getMediumNativeAD(),
                             )
-                        )) : Container(height: height,child: Center(child: CircularProgressIndicator(),));
+                        )) : Container(height: height,child: Center(child: CircularProgressIndicator(color: CustomColors.primary),));
                   },);
               }
           ) : SizedBox.shrink();
         }
     );
   }
-
 
   static loadAndShowInterstitialPremium(BuildContext context, {VoidCallback? onDone})async{
     CustomProgressBar progressBar = CustomProgressBar();

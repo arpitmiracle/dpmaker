@@ -4,13 +4,28 @@ import 'package:crop_image/crop_image.dart';
 import 'package:custom_elements/custom_elements.dart';
 import 'package:dpmaker/Constants/ImagePath.dart';
 import 'package:dpmaker/Screens/FrameImageScreen.dart';
+import 'package:dpmaker/Utils/AdsHelper.dart';
 import 'package:dpmaker/Utils/Utils.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class CropImageScreen extends StatelessWidget {
+class CropImageScreen extends StatefulWidget {
   String imagePath;
   CropImageScreen({required this.imagePath});
+
+  @override
+  State<CropImageScreen> createState() => _CropImageScreenState();
+}
+
+class _CropImageScreenState extends State<CropImageScreen> {
+  AdsHelper adsHelper = AdsHelper();
+
+  @override
+  void initState() {
+    AdsHelper.loadInterstitialAd();
+    adsHelper.loadBannerAd();
+    super.initState();
+  }
 
   final controller = CropController(
     aspectRatio: 1,
@@ -48,6 +63,7 @@ class CropImageScreen extends StatelessWidget {
                   InkWell(
                     child: Image.asset(ImagePath.ic_done),
                     onTap: () async {
+                      await AdsHelper.showInterstitialAd();
                       CustomProgressBar progressBar = CustomProgressBar();
                       progressBar.show(context);
                       try{
@@ -66,7 +82,7 @@ class CropImageScreen extends StatelessWidget {
             Expanded(
               child: CropImage(
                 controller: controller,
-                image: Image.file(File(imagePath)),
+                image: Image.file(File(widget.imagePath)),
                 paddingSize: 25.0,
                 alwaysMove: true,
               ),
@@ -74,6 +90,10 @@ class CropImageScreen extends StatelessWidget {
             _buildButtons(context),
           ],
         ),
+      ),
+      bottomNavigationBar: Container(
+        height: 50,
+        child: adsHelper.showBannerAd(),
       ),
     );
   }

@@ -2,13 +2,28 @@ import 'dart:io';
 
 import 'package:custom_elements/custom_elements.dart';
 import 'package:dpmaker/Constants/ImagePath.dart';
+import 'package:dpmaker/Utils/AdsHelper.dart';
 import 'package:dpmaker/Utils/Utils.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class MyAlbumScreen extends StatelessWidget {
+class MyAlbumScreen extends StatefulWidget {
   MyAlbumScreen({Key? key}) : super(key: key);
+
+  @override
+  State<MyAlbumScreen> createState() => _MyAlbumScreenState();
+}
+
+class _MyAlbumScreenState extends State<MyAlbumScreen> {
+  AdsHelper adsHelper = AdsHelper();
   List<File> allMedia = Utils.fetchAllMedia();
+  @override
+  void initState() {
+    AdsHelper.loadInterstitialAd();
+    adsHelper.loadBannerAd();
+    super.initState();
+  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -69,6 +84,10 @@ class MyAlbumScreen extends StatelessWidget {
             ),
           ],
         )
+      ),
+      bottomNavigationBar: Container(
+        height: 50,
+        child: adsHelper.showBannerAd(),
       ),
     );
   }

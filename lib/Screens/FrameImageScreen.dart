@@ -3,6 +3,7 @@ import 'package:custom_elements/custom_elements.dart';
 import 'package:document_file_save_plus/document_file_save_plus.dart';
 import 'package:dpmaker/Constants/ImagePath.dart';
 import 'package:dpmaker/Controllers/FrameImageController.dart';
+import 'package:dpmaker/Utils/AdsHelper.dart';
 import 'package:dpmaker/Utils/Utils.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -54,7 +55,8 @@ class FrameImageScreen extends StatelessWidget {
                       ),
                       InkWell(
                         child: Image.asset(ImagePath.ic_download),
-                        onTap: () {
+                        onTap: () async {
+                          await AdsHelper.showInterstitialAd();
                           saveImage();
                         },
                       ),
@@ -201,6 +203,10 @@ class FrameImageScreen extends StatelessWidget {
             ),
           )
         ],
+      ),
+      bottomNavigationBar: Container(
+        height: 50,
+        child: controller.adsHelper.showBannerAd(),
       ),
     );
   }

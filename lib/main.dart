@@ -3,6 +3,7 @@ import 'package:dpmaker/Constants/Constants.dart';
 import 'package:dpmaker/Localization/LocalizationService.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:flutter_native_ad/flutter_native_ad.dart';
 import 'package:get/get.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
@@ -14,7 +15,7 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Hive.initFlutter();
   await Hive.openBox('DpMaker');
-
+  FlutterNativeAd.init();
   runApp(MyApp());
 }
 

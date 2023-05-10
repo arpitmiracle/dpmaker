@@ -1,5 +1,6 @@
 import 'dart:io';
 import 'package:dpmaker/Screens/CropImageScreen.dart';
+import 'package:dpmaker/Utils/AdsHelper.dart';
 import 'package:flutter/material.dart';
 import 'package:custom_elements/custom_elements.dart';
 import 'package:image_picker/image_picker.dart';
@@ -14,8 +15,22 @@ import 'package:url_launcher/url_launcher.dart';
 
 import 'MyAlbumScreen.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
   final ImagePicker _picker = ImagePicker();
+  AdsHelper adsHelper = AdsHelper();
+
+  @override
+  void initState() {
+    AdsHelper.loadInterstitialAd();
+    adsHelper.loadMediumNativeAd();
+    adsHelper.loadBannerAd();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -38,20 +53,35 @@ class HomeScreen extends StatelessWidget {
                 child: Container(
                   padding: EdgeInsets.all(5.w),
                   child: Column(
-                    mainAxisAlignment: MainAxisAlignment.end,
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    crossAxisAlignment: CrossAxisAlignment.end,
                     children: [
-                      InkWell(
-                        onTap: () {
-                          Share.share(AppStrings.share_app_description.toLocalized(context));
-                        },
-                        child: Image.asset(ImagePath.ic_share,height: 60,),
+                      Container(
+                        margin: EdgeInsets.only(top: MediaQuery.of(context).padding.top),
+                        padding: EdgeInsets.all(10),
+                        height: 255,
+                        color: CustomColors.white,
+                        child: adsHelper.showNativeMediumAd(),
                       ),
-                      SizedBox(height: 10,),
-                      InkWell(
-                        onTap: () {
-                          launchUrl(Uri.parse("https://github.com/"));
-                        },
-                        child: Image.asset(ImagePath.ic_star,height: 60,),
+                      Column(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: [
+                          InkWell(
+                            onTap: () async {
+                              await AdsHelper.showInterstitialAd();
+                              Share.share(AppStrings.share_app_description.toLocalized(context));
+                            },
+                            child: Image.asset(ImagePath.ic_share,height: 60,),
+                          ),
+                          SizedBox(height: 10,),
+                          InkWell(
+                            onTap: () async {
+                              await AdsHelper.showInterstitialAd();
+                              launchUrl(Uri.parse("https://github.com/"));
+                            },
+                            child: Image.asset(ImagePath.ic_star,height: 60,),
+                          ),
+                        ],
                       ),
                     ],
                   ),
@@ -73,14 +103,16 @@ class HomeScreen extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
                     InkWell(
-                      onTap: () {
+                      onTap: () async {
+                        await AdsHelper.showInterstitialAd();
                         onSelected(context,2);
                       },
                       child: Image.asset(ImagePath.ic_gallery,height: 50,),
                     ),
                     SizedBox(width: 10.w,),
                     InkWell(
-                      onTap: () {
+                      onTap: () async {
+                        await AdsHelper.showInterstitialAd();
                         Navigator.push(context, MaterialPageRoute(builder: (context) => MyAlbumScreen(),));
                       },
                       child: Image.asset(ImagePath.ic_my_album,height: 50,),
@@ -93,6 +125,7 @@ class HomeScreen extends StatelessWidget {
         ),
         floatingActionButton: InkWell(
           onTap: () async {
+            await AdsHelper.showInterstitialAd();
             onSelected(context,1);
           },
           child: Container(
@@ -103,6 +136,10 @@ class HomeScreen extends StatelessWidget {
           ),
         ),
         floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+        bottomNavigationBar: Container(
+          height: 50,
+          child: adsHelper.showBannerAd(),
+        ),
       ),
     );
   }
@@ -116,5 +153,4 @@ class HomeScreen extends StatelessWidget {
       Navigator.push(context, MaterialPageRoute(builder: (context) => CropImageScreen(imagePath: image.path),));
     }
   }
-
 }
