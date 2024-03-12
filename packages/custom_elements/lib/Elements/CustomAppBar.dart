@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:custom_elements/custom_elements.dart';
 
-class CustomAppBar extends StatelessWidget with PreferredSizeWidget{
+class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
 
   final String title;
   Widget? customTitle;
@@ -14,7 +14,7 @@ class CustomAppBar extends StatelessWidget with PreferredSizeWidget{
   bool isSafeArea;
   Gradient? gradient;
 
-   CustomAppBar({Key? key, required this.title,this.height,this.prefixAction,this.suffixIcon,this.prefixIcon,this.suffixAction,this.iconSize,this.customTitle,this.isSafeArea = true,this.gradient}) : super(key: key);
+  CustomAppBar({Key? key, required this.title,this.height,this.prefixAction,this.suffixIcon,this.prefixIcon,this.suffixAction,this.iconSize,this.customTitle,this.isSafeArea = true,this.gradient}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

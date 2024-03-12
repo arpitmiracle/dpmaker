@@ -20,7 +20,6 @@ class FrameImageController extends GetxController with GetTickerProviderStateMix
   List<Sticker> stickerList = <Sticker>[];
   AdsHelper adsHelper = AdsHelper();
 
-
   @override
   void onInit() {
     AdsHelper.loadInterstitialAd();
