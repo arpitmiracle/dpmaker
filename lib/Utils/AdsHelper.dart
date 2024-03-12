@@ -80,7 +80,7 @@ class AdsHelper {
   static bool isInterstitialAdReady = false;
   static var interstitialAd;
   static int adCount = 1;
-  static int maxAdCount = 4;
+  static int maxAdCount = 7;
 
   static showInterstitialAd({bool ignoreCount = false})async{
     if(ignoreCount){

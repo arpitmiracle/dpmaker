@@ -108,6 +108,7 @@ class FrameImageScreen extends StatelessWidget {
                                   return controller.stickerList.isEmpty ? Container() : DraggableStickers(
                                     stickerList: controller.stickerList,
                                     onEdit: (stkr) async {
+                                      AdsHelper.showInterstitialAd();
                                       if(stkr.isText == true){
                                         TextData? data = await Navigator.push(context, MaterialPageRoute(builder: (context) => FrameText(stickerText: stkr.child as TextWidth?),));
                                         if(data != null) {
@@ -186,6 +187,7 @@ class FrameImageScreen extends StatelessWidget {
                       ],
                       indicatorColor: CustomColors.primary,
                       onTap: (value) async {
+                        AdsHelper.showInterstitialAd();
                         if(value == 4){
                           controller.tabController.animateTo(controller.tabController.previousIndex);
                           TextData? data = await Navigator.push(context, MaterialPageRoute(builder: (context) => FrameText(),));
