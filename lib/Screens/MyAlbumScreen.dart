@@ -3,9 +3,12 @@ import 'dart:io';
 import 'package:custom_elements/custom_elements.dart';
 import 'package:dpmaker/Constants/ImagePath.dart';
 import 'package:dpmaker/Utils/AdsHelper.dart';
+import 'package:dpmaker/Utils/DialogHelper.dart';
 import 'package:dpmaker/Utils/Utils.dart';
+import 'package:easy_image_viewer/easy_image_viewer.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:share_plus/share_plus.dart';
 
 class MyAlbumScreen extends StatefulWidget {
   MyAlbumScreen({Key? key}) : super(key: key);
@@ -77,8 +80,41 @@ class _MyAlbumScreenState extends State<MyAlbumScreen> {
                   mainAxisSpacing: 10,
                 ),
                 itemBuilder: (BuildContext context, int index) {
-                  return Container(
-                    child: Image.file(allMedia[index]),
+                  return Stack(
+                    children: [
+                      InkWell(
+                        onTap: () {
+                          MultiImageProvider multiImageProvider = MultiImageProvider(List.generate(allMedia.length,(index) => FileImage(allMedia[index]),));
+
+                          showImageViewerPager(context, multiImageProvider, onPageChanged: (page) {
+                            print("page changed to $page");
+                          },swipeDismissible: true,doubleTapZoomable: true, onViewerDismissed: (page) {
+                            print("dismissed while on page $page");
+                          });
+
+                        },
+                        child: Image.file(allMedia[index],height: 45.w,width: 45.w,),
+                      ),
+                      Align(
+                        alignment: Alignment.bottomRight,
+                        child: Column(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            IconButton(onPressed: () {
+                              DialogHelper.AdConfirmationDialog(context, title: "Delete image", desc: "Are you sure you want to delete this image?",yes: "Yes", onYes: () async {
+                                await Utils.deleteFile(allMedia[index]);
+                                setState(() {
+                                  allMedia = Utils.fetchAllMedia();
+                                });
+                              },);
+                            }, icon: Image.asset(ImagePath.ic_delete,height: 40,)),
+                            IconButton(onPressed: () {
+                              Share.shareXFiles([XFile(allMedia[index].path)]);
+                            }, icon: Image.asset(ImagePath.ic_share,height: 40,),),
+                          ],
+                        ),
+                      ),
+                    ],
                   );
                 },
               ),

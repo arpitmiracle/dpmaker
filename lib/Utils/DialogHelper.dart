@@ -78,7 +78,7 @@ class DialogHelper {
         });
   }
 
-  static AdConfirmationDialog(BuildContext context,{required String title,required String desc,required VoidCallback onYes}) {
+  static AdConfirmationDialog(BuildContext context,{required String title,String yes = "Continue",required String desc,required VoidCallback onYes}) {
     return Alert(
       context: context,
       type: AlertType.warning,
@@ -106,7 +106,7 @@ class DialogHelper {
         ),
         DialogButton(
           child: CustomTitle(
-            title: "Continue",
+            title: yes,
             fontColor: CustomColors.white,
             fontWeight: FontWeight.normal,
           ),

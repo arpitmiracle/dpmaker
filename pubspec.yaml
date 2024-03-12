@@ -54,6 +54,7 @@ dependencies:
   document_file_save_plus: ^2.0.0
   get: ^4.6.5
   rflutter_alert: ^2.0.7
+  easy_image_viewer: ^1.4.1
   sticker_view:
     path: packages/sticker_view
 

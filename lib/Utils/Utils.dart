@@ -31,17 +31,23 @@ class Utils {
    for(int i=0; i<tmpphotos.length; i++){
     photos.add(tmpphotos[i]!);
    }
-
-   photos
-       .sort((a, b) => b.lastModifiedSync().compareTo(a.lastModifiedSync()));
-
+   photos.sort((a, b) => b.lastModifiedSync().compareTo(a.lastModifiedSync()));
    return photos;
   } catch (e) {
    print(e.toString());
    photos = <File>[];
    return photos;
   }
+ }
 
+ static Future<int> deleteFile(File file) async {
+  try {
+   await file.delete();
+   return 1;
+  } catch (e) {
+   print("e $e");
+   return 0;
+  }
  }
 
  static Future<bool> isInternetConnected()async{
