@@ -71,15 +71,33 @@ class _MyAlbumScreenState extends State<MyAlbumScreen> {
                   title: "No images found!",
                   fontColor: CustomColors.primary,
                 ),
-              ) : GridView.builder(
+              ) :
+              ListView.builder(
                 padding: EdgeInsets.all(10),
                 itemCount: allMedia.length,
-                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 2,
-                  crossAxisSpacing: 10,
-                  mainAxisSpacing: 10,
-                ),
-                itemBuilder: (BuildContext context, int index) {
+                shrinkWrap: true,
+                itemBuilder: (context, index) {
+                  return ListTile(
+                    leading: Image.file(allMedia[index],),
+                    title: Text(allMedia[index].path.split("/").last),
+                    contentPadding: EdgeInsets.zero,
+                    trailing: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        IconButton(onPressed: () {
+                          Share.shareXFiles([XFile(allMedia[index].path)]);
+                        }, icon: Image.asset(ImagePath.ic_share,height: 40,),),
+                        IconButton(onPressed: () {
+                          DialogHelper.AdConfirmationDialog(context, title: "Delete image", desc: "Are you sure you want to delete this image?",yes: "Yes", onYes: () async {
+                            await Utils.deleteFile(allMedia[index]);
+                            setState(() {
+                              allMedia = Utils.fetchAllMedia();
+                            });
+                          },);
+                        }, icon: Image.asset(ImagePath.ic_delete,height: 40,)),
+                      ],
+                    ),
+                  );
                   return Stack(
                     children: [
                       InkWell(
@@ -116,8 +134,54 @@ class _MyAlbumScreenState extends State<MyAlbumScreen> {
                       ),
                     ],
                   );
-                },
-              ),
+                },)
+              // GridView.builder(
+              //   padding: EdgeInsets.all(10),
+              //   itemCount: allMedia.length,
+              //   gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+              //     crossAxisCount: 2,
+              //     crossAxisSpacing: 10,
+              //     mainAxisSpacing: 10,
+              //   ),
+              //   itemBuilder: (BuildContext context, int index) {
+              //     return Stack(
+              //       children: [
+              //         InkWell(
+              //           onTap: () {
+              //             MultiImageProvider multiImageProvider = MultiImageProvider(List.generate(allMedia.length,(index) => FileImage(allMedia[index]),));
+              //
+              //             showImageViewerPager(context, multiImageProvider, onPageChanged: (page) {
+              //               print("page changed to $page");
+              //             },swipeDismissible: true,doubleTapZoomable: true, onViewerDismissed: (page) {
+              //               print("dismissed while on page $page");
+              //             });
+              //
+              //           },
+              //           child: Image.file(allMedia[index],height: 45.w,width: 45.w,),
+              //         ),
+              //         Align(
+              //           alignment: Alignment.bottomRight,
+              //           child: Column(
+              //             mainAxisSize: MainAxisSize.min,
+              //             children: [
+              //               IconButton(onPressed: () {
+              //                 DialogHelper.AdConfirmationDialog(context, title: "Delete image", desc: "Are you sure you want to delete this image?",yes: "Yes", onYes: () async {
+              //                   await Utils.deleteFile(allMedia[index]);
+              //                   setState(() {
+              //                     allMedia = Utils.fetchAllMedia();
+              //                   });
+              //                 },);
+              //               }, icon: Image.asset(ImagePath.ic_delete,height: 40,)),
+              //               IconButton(onPressed: () {
+              //                 Share.shareXFiles([XFile(allMedia[index].path)]);
+              //               }, icon: Image.asset(ImagePath.ic_share,height: 40,),),
+              //             ],
+              //           ),
+              //         ),
+              //       ],
+              //     );
+              //   },
+              // ),
             ),
           ],
         )
