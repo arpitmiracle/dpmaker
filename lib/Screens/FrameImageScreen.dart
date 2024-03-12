@@ -3,6 +3,7 @@ import 'package:custom_elements/custom_elements.dart';
 import 'package:document_file_save_plus/document_file_save_plus.dart';
 import 'package:dpmaker/Constants/ImagePath.dart';
 import 'package:dpmaker/Controllers/FrameImageController.dart';
+import 'package:dpmaker/Screens/MyAlbumScreen.dart';
 import 'package:dpmaker/Utils/AdsHelper.dart';
 import 'package:dpmaker/Utils/Utils.dart';
 import 'package:flutter/material.dart';
@@ -220,6 +221,7 @@ class FrameImageScreen extends StatelessWidget {
       //Save single image file
       await DocumentFileSavePlus().saveFile(capturedImage!, "DP_Creator${DateTime.now()}.png", "image/png");
       Utils.showToast("Profile Pic saved successfully!");
+      Get.off(() => MyAlbumScreen());
     }).catchError((onError) {
       print(onError);
     });
