@@ -24,7 +24,7 @@ class Utils {
   try {
    List<File?> tmpphotos = Directory('/storage/emulated/0/Download')
        .listSync()
-       .map((e) => (e.path.contains("DP_Maker") ? e as File : null))
+       .map((e) => (e.path.contains("DP_Creator") ? e as File : null))
        .toList();
    tmpphotos.removeWhere((element) => element == null);
 
