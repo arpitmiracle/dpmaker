@@ -66,6 +66,7 @@ class _MyAlbumScreenState extends State<MyAlbumScreen> {
               child: allMedia.isEmpty ? Center(
                 child: CustomTitle(
                   title: "No images found!",
+                  fontColor: CustomColors.primary,
                 ),
               ) : GridView.builder(
                 padding: EdgeInsets.all(10),

@@ -25,7 +25,7 @@ class FrameSelection extends StatelessWidget {
                   color: CustomColors.primary,
                   borderRadius: BorderRadius.circular(15),
                 ),
-                child: Text(framesList[index]['category'].toString(),),
+                child: Text(framesList[index]['category'].toString(),style: TextStyle(color: Colors.white)),
               ),
             )),
             isScrollable: true,

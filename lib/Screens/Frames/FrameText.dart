@@ -160,7 +160,7 @@ class _FrameTextState extends State<FrameText> with SingleTickerProviderStateMix
                             color: CustomColors.primary,
                             borderRadius: BorderRadius.circular(15),
                           ),
-                          child: Text(framesList[index]['category'].toString(),),
+                          child: Text(framesList[index]['category'].toString(),style: TextStyle(color: Colors.white)),
                         ),
                       )),
                       isScrollable: true,

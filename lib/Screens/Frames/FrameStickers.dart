@@ -24,7 +24,7 @@ class FrameStickers extends StatelessWidget {
                   color: CustomColors.primary,
                   borderRadius: BorderRadius.circular(15),
                 ),
-                child: Text(stickersList[index]['category'].toString(),),
+                child: Text(stickersList[index]['category'].toString(),style: TextStyle(color: Colors.white)),
               ),
             )),
             isScrollable: true,

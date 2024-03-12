@@ -216,8 +216,8 @@ class FrameImageScreen extends StatelessWidget {
         .capture(delay: Duration(milliseconds: 10))
         .then((capturedImage) async {
       //Save single image file
-      await DocumentFileSavePlus().saveFile(capturedImage!, "DP_Maker${DateTime.now()}.png", "image/png");
-      Utils.showToast("DP saved successfully!");
+      await DocumentFileSavePlus().saveFile(capturedImage!, "DP_Creator${DateTime.now()}.png", "image/png");
+      Utils.showToast("Profile Pic saved successfully!");
     }).catchError((onError) {
       print(onError);
     });
