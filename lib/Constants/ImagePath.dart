@@ -2,7 +2,6 @@
 ///  it helps to centralize all Images Path.
 
 class ImagePath {
-  static const imgLogo = 'assets/images/img_logo.png';
   static const bg_home = 'assets/images/bg_home.jpg';
   static const ic_camera = 'assets/images/ic_camera.png';
   static const ic_gallery = 'assets/images/ic_gallery.png';
