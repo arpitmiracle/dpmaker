@@ -29,7 +29,7 @@ class MyApp extends StatelessWidget {
           valueListenable: currentAppLocal,
           builder: (BuildContext context, Locale value, Widget? child) {
             return GetMaterialApp(
-              title: 'DP Creator - Profile Pic Master',
+              title: 'DP Creator - ProfilePic Master',
               debugShowCheckedModeBanner: false,
               theme: ThemeData(
                 primarySwatch: CustomColors.swatch,

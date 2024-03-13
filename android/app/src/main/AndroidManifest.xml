@@ -5,7 +5,7 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
-        android:label="DP Creator - Profile Pic Master"
+        android:label="DP Creator - ProfilePic Master"
         android:name="${applicationName}"
         android:allowBackup="true"
         android:requestLegacyExternalStorage="true"
