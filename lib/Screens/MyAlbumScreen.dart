@@ -4,6 +4,7 @@ import 'package:custom_elements/custom_elements.dart';
 import 'package:dpmaker/Constants/ImagePath.dart';
 import 'package:dpmaker/Utils/AdsHelper.dart';
 import 'package:dpmaker/Utils/DialogHelper.dart';
+import 'package:dpmaker/Utils/PermissionUtils.dart';
 import 'package:dpmaker/Utils/Utils.dart';
 import 'package:easy_image_viewer/easy_image_viewer.dart';
 import 'package:flutter/material.dart';
@@ -22,9 +23,18 @@ class _MyAlbumScreenState extends State<MyAlbumScreen> {
   List<File> allMedia = Utils.fetchAllMedia();
   @override
   void initState() {
+    checkPermission();
     AdsHelper.loadInterstitialAd();
     adsHelper.loadBannerAd();
     super.initState();
+  }
+
+  checkPermission()async{
+    if(await PermissionUtils.checkStoragePermissionGranted()){
+      setState(() {
+        allMedia = Utils.fetchAllMedia();
+      });
+    }
   }
 
 
