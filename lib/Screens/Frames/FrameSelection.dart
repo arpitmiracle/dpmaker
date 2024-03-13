@@ -46,20 +46,21 @@ class FrameSelection extends StatelessWidget {
                 itemBuilder: (context, index) {
                   return InkWell(
                     onTap: () async {
-                      if(index > 2){
-                        DialogHelper.AdConfirmationDialog(context,title: "Want to use frame?",desc: "To use this frame, watch ad first. It's worth it!",onYes: () async {
-                          await AdsHelper.loadAndShowInterstitialPremium(context,onDone: () {
-                            controller.selectedFrame.value = framesList[i]['frames'][index];
-                          },);
-                        },);
-                      } else {
+                      // if(index > 2){
+                      //   DialogHelper.AdConfirmationDialog(context,title: "Want to use frame?",desc: "To use this frame, watch ad first. It's worth it!",onYes: () async {
+                      //     await AdsHelper.loadAndShowInterstitialPremium(context,onDone: () {
+                      //       controller.selectedFrame.value = framesList[i]['frames'][index];
+                      //     },);
+                      //   },);
+                      // } else {
                         controller.selectedFrame.value = framesList[i]['frames'][index];
-                      }
+                      // }
                     },
                     child: Stack(
                       children: [
                         framesList[i]['frames'][index].toString().isEmpty ? Container() : Image.asset(framesList[i]['frames'][index]),
-                        Obx(() => (controller.selectedFrame.value == framesList[i]['frames'][index]) ? Center(child: Icon(Icons.done),) : (index > 2) ? Center(child: Icon(Icons.lock,),) : SizedBox())
+                        // Obx(() => (controller.selectedFrame.value == framesList[i]['frames'][index]) ? Center(child: Icon(Icons.done),) : (index > 2) ? Center(child: Icon(Icons.lock,),) : SizedBox())
+                        Obx(() => (controller.selectedFrame.value == framesList[i]['frames'][index]) ? Center(child: Icon(Icons.done),) : SizedBox())
                       ],
                     ),
                   );

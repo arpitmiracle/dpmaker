@@ -45,22 +45,22 @@ class FrameStickers extends StatelessWidget {
                 itemBuilder: (context, index) {
                   return InkWell(
                     onTap: () async {
-                      if(index > 2){
-                        DialogHelper.AdConfirmationDialog(context,title: "Want to use sticker?",desc: "To use this sticker, watch ad first. It's worth it!",onYes: () async {
-                          await AdsHelper.loadAndShowInterstitialPremium(context,onDone: () {
-                            controller.stickerList.add(Sticker(id: "Sticker$index${DateTime.now().hashCode}",child: Container(height: 40,width: 40,child: Center(child: Image.asset(stickersList[i]['stickers'][index],fit: BoxFit.cover,))),));
-                            controller.update();
-                          },);
-                        },);
-                      } else {
+                      // if(index > 2){
+                      //   DialogHelper.AdConfirmationDialog(context,title: "Want to use sticker?",desc: "To use this sticker, watch ad first. It's worth it!",onYes: () async {
+                      //     await AdsHelper.loadAndShowInterstitialPremium(context,onDone: () {
+                      //       controller.stickerList.add(Sticker(id: "Sticker$index${DateTime.now().hashCode}",child: Container(height: 40,width: 40,child: Center(child: Image.asset(stickersList[i]['stickers'][index],fit: BoxFit.cover,))),));
+                      //       controller.update();
+                      //     },);
+                      //   },);
+                      // } else {
                         controller.stickerList.add(Sticker(id: "Sticker$index${DateTime.now().hashCode}",child: Container(height: 40,width: 40,child: Center(child: Image.asset(stickersList[i]['stickers'][index],fit: BoxFit.cover,))),));
                         controller.update();
-                      }
+                      // }
                     },
                     child: Stack(
                       children: [
                         Image.asset(stickersList[i]['stickers'][index]),
-                        if(index > 2) Center(child: Icon(Icons.lock,),),
+                        // if(index > 2) Center(child: Icon(Icons.lock,),),
                       ],
                     ),
                   );
