@@ -36,12 +36,12 @@
         <meta-data
             android:name="flutterEmbedding"
             android:value="2" />
-       <meta-data
-           android:name="com.google.android.gms.ads.APPLICATION_ID"
-           android:value="ca-app-pub-3940256099942544~3347511713"/>
-<!--        Live  -->
 <!--       <meta-data-->
 <!--           android:name="com.google.android.gms.ads.APPLICATION_ID"-->
-<!--           android:value="ca-app-pub-3974815580615835~4792010648"/>-->
+<!--           android:value="ca-app-pub-3940256099942544~3347511713"/>-->
+<!--        Live  -->
+       <meta-data
+           android:name="com.google.android.gms.ads.APPLICATION_ID"
+           android:value="ca-app-pub-3974815580615835~3157273388"/>
     </application>
 </manifest>

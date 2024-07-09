@@ -5,16 +5,16 @@ import 'package:flutter_native_ad/flutter_native_ad.dart';
 
 class AdsHelper {
 
-  static String googleOpenAdID = "ca-app-pub-3940256099942544/3419835294";
-  static String googleBannerAdID = "ca-app-pub-3940256099942544/6300978111";
-  static String googleInterstitialAdID = "ca-app-pub-3940256099942544/1033173712";
-  static String googleMediumNativeAdID = "ca-app-pub-3940256099942544/2247696110";
+  // static String googleOpenAdID = "ca-app-pub-3940256099942544/3419835294";
+  // static String googleBannerAdID = "ca-app-pub-3940256099942544/6300978111";
+  // static String googleInterstitialAdID = "ca-app-pub-3940256099942544/1033173712";
+  // static String googleMediumNativeAdID = "ca-app-pub-3940256099942544/2247696110";
 
   // Live
-  // static String googleOpenAdID = "ca-app-pub-3940256099942544/3419835294";
-  // static String googleBannerAdID = "ca-app-pub-3974815580615835/2837545547";
-  // static String googleInterstitialAdID = "ca-app-pub-3974815580615835/1806754652";
-  // static String googleMediumNativeAdID = "ca-app-pub-3974815580615835/3767483837";
+  static String googleOpenAdID = "ca-app-pub-3940256099942544/3419835294";
+  static String googleBannerAdID = "ca-app-pub-3974815580615835/6697063145";
+  static String googleInterstitialAdID = "ca-app-pub-3974815580615835/7893560902";
+  static String googleMediumNativeAdID = "ca-app-pub-3974815580615835/7211034629";
 
   static var adOpenAd = FlutterAdOpenAd();
   static bool isAppOpenAdAdReady = false;
