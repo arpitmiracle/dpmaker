@@ -88,9 +88,9 @@ class DialogHelper {
               side: BorderSide(color: CustomColors.primary),
               borderRadius: BorderRadius.circular(10)),
           titleStyle: TextStyle(
-            color: Theme.of(context).textTheme.headline1?.color,
+            color: Theme.of(context).textTheme.headlineLarge?.color,
           ),
-          descStyle: TextStyle(color: CustomColors.grey)),
+          descStyle: TextStyle(color: CustomColors.grey,fontSize: 17)),
       title: title,
       desc: desc,
       closeIcon: Icon(Icons.close),

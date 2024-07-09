@@ -12,9 +12,9 @@ class AdsHelper {
 
   // Live
   // static String googleOpenAdID = "ca-app-pub-3940256099942544/3419835294";
-  // static String googleBannerAdID = "ca-app-pub-8789240587943140/1991707048";
-  // static String googleInterstitialAdID = "ca-app-pub-8789240587943140/4715386389";
-  // static String googleMediumNativeAdID = "ca-app-pub-8789240587943140/9754646993";
+  // static String googleBannerAdID = "ca-app-pub-3974815580615835/2837545547";
+  // static String googleInterstitialAdID = "ca-app-pub-3974815580615835/1806754652";
+  // static String googleMediumNativeAdID = "ca-app-pub-3974815580615835/3767483837";
 
   static var adOpenAd = FlutterAdOpenAd();
   static bool isAppOpenAdAdReady = false;
