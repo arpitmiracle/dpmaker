@@ -77,7 +77,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           InkWell(
                             onTap: () async {
                               await AdsHelper.showInterstitialAd();
-                              launchUrl(Uri.parse("https://play.google.com/store/apps/details?id=com.photo.dpcreator"));
+                              launchUrl(Uri.parse("https://play.google.com/store/apps/details?id=com.photos.dpcreator"));
                             },
                             child: Image.asset(ImagePath.ic_star,height: 60,),
                           ),

@@ -1,4 +1,4 @@
-package com.photo.dpcreator
+package com.photos.dpcreator
 
 import io.flutter.embedding.android.FlutterActivity
 
