@@ -92,7 +92,7 @@ class _CropImageScreenState extends State<CropImageScreen> {
         ),
       ),
       bottomNavigationBar: Container(
-        height: 50,
+        // height: 50,
         child: adsHelper.showBannerAd(),
       ),
     );

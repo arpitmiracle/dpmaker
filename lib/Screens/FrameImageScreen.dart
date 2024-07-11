@@ -216,7 +216,7 @@ class FrameImageScreen extends StatelessWidget {
           ],
         ),
         bottomNavigationBar: Container(
-          height: 50,
+          // height: 50,
           child: controller.adsHelper.showBannerAd(),
         ),
       ),

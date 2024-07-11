@@ -56,13 +56,14 @@ class _HomeScreenState extends State<HomeScreen> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     crossAxisAlignment: CrossAxisAlignment.end,
                     children: [
-                      Container(
-                        margin: EdgeInsets.only(top: MediaQuery.of(context).padding.top),
-                        padding: EdgeInsets.all(10),
-                        height: 255,
-                        color: CustomColors.white,
-                        child: adsHelper.showNativeMediumAd(),
-                      ),
+                      // Container(
+                      //   margin: EdgeInsets.only(top: MediaQuery.of(context).padding.top),
+                      //   padding: EdgeInsets.all(10),
+                      //   height: 255,
+                      //   color: CustomColors.white,
+                      //   child: adsHelper.showNativeMediumAd(),
+                      // ),
+                      adsHelper.showNativeMediumAd(),
                       Column(
                         mainAxisAlignment: MainAxisAlignment.end,
                         children: [
@@ -137,7 +138,7 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
         floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
         bottomNavigationBar: Container(
-          height: 50,
+          // height: 50,
           child: adsHelper.showBannerAd(),
         ),
       ),

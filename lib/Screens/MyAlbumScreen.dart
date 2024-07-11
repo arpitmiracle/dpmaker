@@ -197,7 +197,7 @@ class _MyAlbumScreenState extends State<MyAlbumScreen> {
         )
       ),
       bottomNavigationBar: Container(
-        height: 50,
+        // height: 50,
         child: adsHelper.showBannerAd(),
       ),
     );

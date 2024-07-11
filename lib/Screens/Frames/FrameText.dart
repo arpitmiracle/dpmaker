@@ -215,7 +215,7 @@ class _FrameTextState extends State<FrameText> with SingleTickerProviderStateMix
         ),
       ),
       bottomNavigationBar: Container(
-        height: 50,
+        // height: 50,
         child: adsHelper.showBannerAd(),
       ),
     );

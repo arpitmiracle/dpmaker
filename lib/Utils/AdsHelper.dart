@@ -57,24 +57,24 @@ class AdsHelper {
     return ValueListenableBuilder(
         valueListenable: bannerAdNotifier,
         builder: (context,value,child) {
-          return (value is FlutterBannerAd) ? Builder(
-              builder: (context) {
-                return Align(
-                    alignment: Alignment.bottomCenter,
-                    child: AnimatedContainer(
-                      duration: Duration(seconds: 1),
-                      curve: Curves.fastLinearToSlowEaseIn,
-                      alignment: Alignment.bottomCenter,
-                      padding: EdgeInsets.only(top: 5),
-                      width: double.infinity,
-                      color: Colors.white,
-                      child: Container(
-                          width: value.bannerAd.size.width.toDouble(),
-                          height: value.bannerAd.size.height.toDouble(),
-                          child: value.getBannerAd()
-                      ),
-                    ));
-              }
+          return (value is FlutterBannerAd) ? Container(
+            width: value.bannerAd.size.width.toDouble(),
+            height: value.bannerAd.size.height.toDouble(),
+            child: Align(
+                alignment: Alignment.bottomCenter,
+                child: AnimatedContainer(
+                  duration: Duration(seconds: 1),
+                  curve: Curves.fastLinearToSlowEaseIn,
+                  alignment: Alignment.bottomCenter,
+                  padding: EdgeInsets.only(top: 5),
+                  width: double.infinity,
+                  color: Colors.white,
+                  child: Container(
+                      width: value.bannerAd.size.width.toDouble(),
+                      height: value.bannerAd.size.height.toDouble(),
+                      child: value.getBannerAd()
+                  ),
+                )),
           ) : SizedBox.shrink();
         }
     );
