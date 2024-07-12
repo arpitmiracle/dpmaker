@@ -171,6 +171,7 @@ List framesList = [
   {
     "category" : "Black",
     "frames" : [
+      "",
       "assets/frames/Black/border_black_01.png",
       "assets/frames/Black/border_black_02.png",
       "assets/frames/Black/border_black_03.png",
@@ -205,6 +206,7 @@ List framesList = [
   {
     "category" : "Colorful",
     "frames" : [
+      "",
       "assets/frames/Colorful/border_colorful_01.png",
       "assets/frames/Colorful/border_colorful_02.png",
       "assets/frames/Colorful/border_colorful_03.png",
@@ -250,6 +252,7 @@ List framesList = [
   {
     "category" : "Cute",
     "frames" : [
+      "",
       "assets/frames/Cute/border_cute_01.png",
       "assets/frames/Cute/border_cute_02.png",
       "assets/frames/Cute/border_cute_03.png",
@@ -296,6 +299,7 @@ List framesList = [
   {
     "category" : "Flowers",
     "frames" : [
+      "",
       "assets/frames/Flowers/border_flower_01.png",
       "assets/frames/Flowers/border_flower_02.png",
       "assets/frames/Flowers/border_flower_03.png",
@@ -357,6 +361,7 @@ List framesList = [
   {
     "category" : "Gold",
     "frames" : [
+      "",
       "assets/frames/Gold/border_gold_00.png",
       "assets/frames/Gold/border_gold_01.png",
       "assets/frames/Gold/border_gold_02.png",
@@ -393,6 +398,7 @@ List framesList = [
   {
     "category" : "Minimal",
     "frames" : [
+      "",
       "assets/frames/Minimal/border_minimal_01.png",
       "assets/frames/Minimal/border_minimal_02.png",
       "assets/frames/Minimal/border_minimal_03.png",
@@ -452,6 +458,7 @@ List framesList = [
   {
     "category" : "Neon",
     "frames" : [
+      "",
       "assets/frames/Neon/border_neon_01.png",
       "assets/frames/Neon/border_neon_02.png",
       "assets/frames/Neon/border_neon_03.png",
