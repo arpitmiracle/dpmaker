@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:dpmaker/Constants/Constants.dart';
 import 'package:dpmaker/Screens/CropImageScreen.dart';
 import 'package:dpmaker/Utils/AdsHelper.dart';
 import 'package:flutter/material.dart';
@@ -27,6 +28,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   void initState() {
+    registerAnalyticsEvent(name: EventType.homeScreen);
     AdsHelper.loadInterstitialAd();
     adsHelper.loadMediumNativeAd();
     adsHelper.loadBannerAd();
@@ -154,6 +156,7 @@ class _HomeScreenState extends State<HomeScreen> {
     final XFile? image = await _picker.pickImage(source: val == 1 ? ImageSource.camera : ImageSource.gallery);
     progressBar.hide();
     if(image != null){
+      registerAnalyticsEvent(name: EventType.cropImageScreen);
       Navigator.push(context, MaterialPageRoute(builder: (context) => CropImageScreen(imagePath: image.path),));
     }
   }

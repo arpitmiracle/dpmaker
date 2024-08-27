@@ -58,6 +58,9 @@ dependencies:
   upgrader: ^10.3.0
   sticker_view:
     path: packages/sticker_view
+  firebase_core: ^3.3.0
+  firebase_analytics: ^11.2.1
+  firebase_crashlytics: ^4.0.4
 
 dev_dependencies:
   flutter_test:

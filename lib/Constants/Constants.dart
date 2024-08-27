@@ -1,3 +1,4 @@
+import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter/material.dart';
 import 'dart:developer' as d;
 
@@ -17,6 +18,16 @@ void printLog(String val){
   if(DEBUG) d.log(val);
 }
 
+registerAnalyticsEvent({required String name,}){
+  FirebaseAnalytics.instance.logEvent(name: name, parameters: {'time': '${DateTime.now()}'});
+}
+
+class EventType {
+  static String homeScreen = "home_screen";
+  static String myAlbumScreen = "my_album_screen";
+  static String frameImageScreen = "frame_image_screen";
+  static String cropImageScreen = "crop_image_screen";
+}
 
 bool checkResponse(int? code){
   return code == 200 ? true : false;

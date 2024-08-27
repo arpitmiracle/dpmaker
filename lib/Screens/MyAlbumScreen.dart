@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:custom_elements/custom_elements.dart';
+import 'package:dpmaker/Constants/Constants.dart';
 import 'package:dpmaker/Constants/ImagePath.dart';
 import 'package:dpmaker/Utils/AdsHelper.dart';
 import 'package:dpmaker/Utils/DialogHelper.dart';
@@ -23,6 +24,7 @@ class _MyAlbumScreenState extends State<MyAlbumScreen> {
   List<File> allMedia = Utils.fetchAllMedia();
   @override
   void initState() {
+    registerAnalyticsEvent(name: EventType.myAlbumScreen);
     checkPermission();
     AdsHelper.loadInterstitialAd();
     adsHelper.loadBannerAd();

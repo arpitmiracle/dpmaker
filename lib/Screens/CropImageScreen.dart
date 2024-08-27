@@ -2,6 +2,7 @@ import 'dart:io';
 import 'dart:ui' as ui;
 import 'package:crop_image/crop_image.dart';
 import 'package:custom_elements/custom_elements.dart';
+import 'package:dpmaker/Constants/Constants.dart';
 import 'package:dpmaker/Constants/ImagePath.dart';
 import 'package:dpmaker/Screens/FrameImageScreen.dart';
 import 'package:dpmaker/Utils/AdsHelper.dart';
@@ -69,6 +70,7 @@ class _CropImageScreenState extends State<CropImageScreen> {
                       try{
                         ui.Image img = await controller.croppedBitmap();
                         var byteData = (await img.toByteData(format: ui.ImageByteFormat.png))!.buffer.asUint8List();
+                        registerAnalyticsEvent(name: EventType.frameImageScreen);
                         Get.off(() => FrameImageScreen(imageBytes: byteData));
                       } catch (e){} finally {
                         progressBar.hide();
