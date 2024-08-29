@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'package:dpmaker/Constants/Constants.dart';
 import 'package:dpmaker/Screens/CropImageScreen.dart';
+import 'package:dpmaker/Screens/SendNotificationScreen.dart';
 import 'package:dpmaker/Utils/AdsHelper.dart';
 import 'package:flutter/material.dart';
 import 'package:custom_elements/custom_elements.dart';
@@ -68,6 +69,9 @@ class _HomeScreenState extends State<HomeScreen> {
                         //   child: adsHelper.showNativeMediumAd(),
                         // ),
                         adsHelper.showNativeMediumAd(),
+                        if(InDevelopment) ElevatedButton(onPressed: () {
+                          Navigator.push(context, MaterialPageRoute(builder: (context) => Sendnotificationscreen(),));
+                        }, child: Text("Send Notification")),
                         Column(
                           mainAxisAlignment: MainAxisAlignment.end,
                           children: [
