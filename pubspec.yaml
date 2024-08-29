@@ -61,6 +61,9 @@ dependencies:
   firebase_core: ^3.3.0
   firebase_analytics: ^11.2.1
   firebase_crashlytics: ^4.0.4
+  firebase_messaging: ^15.0.4
+  flutter_local_notifications: ^17.2.2
+  dio: ^5.6.0
 
 dev_dependencies:
   flutter_test:
