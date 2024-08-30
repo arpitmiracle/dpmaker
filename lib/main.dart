@@ -68,7 +68,7 @@ class _MyAppState extends State<MyApp> {
 
   @override
   void initState() {
-    FirebaseCrashlytics.instance.setCrashlyticsCollectionEnabled(!kDebugMode);
+    FirebaseCrashlytics.instance.setCrashlyticsCollectionEnabled(true);
     super.initState();
   }
 

@@ -48,8 +48,6 @@ class Sendnotificationscreen extends StatelessWidget {
                   "universe_domain": "googleapis.com"
                 };
 
-                String? token = await FirebaseMessaging.instance.getToken();
-
                 /// Add Your Service Account File Content as Map
                 var server = FirebaseCloudMessagingServer(
                   serviceAccountFileContent,
@@ -79,7 +77,6 @@ class Sendnotificationscreen extends StatelessWidget {
                   ),
                 );
                 print(result);
-
 
                 // Dio dio = Dio();
                 // dio.post("https://fcm.googleapis.com/fcm/send",data: {
