@@ -65,7 +65,7 @@ class FrameImageScreen extends StatelessWidget {
                         InkWell(
                           child: Image.asset(ImagePath.ic_download),
                           onTap: () async {
-                            await AdsHelper.showInterstitialAd();
+                            await AdsHelper.showInterstitialAd(ignoreCount: true);
                             saveImage();
                           },
                         ),

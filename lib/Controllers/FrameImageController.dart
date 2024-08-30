@@ -1,5 +1,6 @@
 import 'package:dpmaker/Constants/Constants.dart';
 import 'package:dpmaker/Utils/AdsHelper.dart';
+import 'package:dpmaker/Utils/circular_text.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -19,6 +20,11 @@ class FrameImageController extends GetxController with GetTickerProviderStateMix
   Rx<ColorFilter?> selectedColorFilter = (null as ColorFilter?).obs;
   List<Sticker> stickerList = <Sticker>[];
   AdsHelper adsHelper = AdsHelper();
+  double space = 10;
+  double startAngle = 30;
+  bool showStroke = false;
+  StartAngleAlignment startAngleAlignment = StartAngleAlignment.end;
+  CircularTextDirection direction = CircularTextDirection.anticlockwise;
 
   @override
   void onInit() {

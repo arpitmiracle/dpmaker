@@ -14,6 +14,7 @@ import 'package:hive_flutter/hive_flutter.dart';
 
 import 'Route/Routes.dart';
 import 'Route/Screens.dart';
+import 'Utils/circular_text.dart';
 import 'Utils/push_notification_utils.dart';
 import 'firebase_options.dart';
 

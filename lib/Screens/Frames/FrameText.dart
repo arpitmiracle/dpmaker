@@ -4,6 +4,8 @@ import 'package:dpmaker/Constants/ImagePath.dart';
 import 'package:dpmaker/Controllers/FrameImageController.dart';
 import 'package:dpmaker/Utils/AdsHelper.dart';
 import 'package:dpmaker/Utils/DialogHelper.dart';
+import 'package:dpmaker/Utils/circular_text.dart';
+import 'package:dpmaker/main.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -21,14 +23,14 @@ class _FrameTextState extends State<FrameText> with SingleTickerProviderStateMix
   late TabController tabController;
   TextEditingController textEditingController = TextEditingController();
   String? selectedFont;
-  Color? selectedColor;
+  Color? selectedColor = colorsList.first;
   FrameImageController controller = Get.find();
   String selectedFrame = "";
   AdsHelper adsHelper = AdsHelper();
 
   @override
   void initState() {
-    tabController = TabController(length: 3, vsync: this);
+    tabController = TabController(length: 4, vsync: this);
     adsHelper.loadBannerAd();
     if(widget.stickerText != null){
       textEditingController.text = widget.stickerText?.text ?? "";
@@ -96,8 +98,22 @@ class _FrameTextState extends State<FrameText> with SingleTickerProviderStateMix
                         border: Border.all(color: CustomColors.scaffoldBgColor),
                         borderRadius: BorderRadius.circular(10)
                     ),
-                    child: Center(child: TextWidth(selectedFrame: selectedFrame,text: textEditingController.text,style: TextStyle(color: selectedColor,fontFamily: selectedFont))),
+                    child: GetBuilder<FrameImageController>(
+                      builder: (controller) {
+                        return Center(child: TextWidthCircle(selectedFrame: selectedFrame,text: textEditingController.text,style: TextStyle(color: selectedColor,fontFamily: selectedFont)));
+                      },
+                    ),
                   ),
+                  // Container(
+                  //   height: 22.h,
+                  //   width: double.infinity,
+                  //   margin: EdgeInsets.symmetric(horizontal: 10),
+                  //   decoration: BoxDecoration(
+                  //       border: Border.all(color: CustomColors.scaffoldBgColor),
+                  //       borderRadius: BorderRadius.circular(10)
+                  //   ),
+                  //   child: Center(child: TextWidth(selectedFrame: selectedFrame,text: textEditingController.text,style: TextStyle(color: selectedColor,fontFamily: selectedFont))),
+                  // ),
                   SizedBox(height: 15,),
                   CustomTextField(
                     controller: textEditingController,
@@ -133,6 +149,9 @@ class _FrameTextState extends State<FrameText> with SingleTickerProviderStateMix
                   ),
                   Tab(
                     child: Image.asset(ImagePath.ic_frames,color: tabController.index == 2 ? CustomColors.primary : CustomColors.black,width: 30,),
+                  ),
+                  Tab(
+                    child: Image.asset(ImagePath.ic_frames,color: tabController.index == 3 ? CustomColors.primary : CustomColors.black,width: 30,),
                   ),
                 ],
                 indicatorColor: CustomColors.primary,
@@ -208,7 +227,8 @@ class _FrameTextState extends State<FrameText> with SingleTickerProviderStateMix
                       )),
                     )),
                   ],
-                )
+                ),
+                getRoundView(),
               ],
             )),
           ],
@@ -276,6 +296,127 @@ class _FrameTextState extends State<FrameText> with SingleTickerProviderStateMix
       },
     );
   }
+
+  getRoundView(){
+    return Container(
+      padding: EdgeInsets.all(10),
+      child: GetBuilder<FrameImageController>(
+        builder: (controller) {
+          return CustomScrollView(
+            slivers: <Widget>[
+              buildSpacePanel(),
+              buildStartAnglePanel(),
+              buildCircularTextAnglePositionPanel(),
+              buildCircularTextDirectionPanel(),
+            ],
+          );
+        },
+      ),
+    );
+  }
+
+  Widget buildSpacePanel() {
+    return SliverToBoxAdapter(
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: <Widget>[
+          Text("SPACE", style: TextStyle(fontWeight: FontWeight.bold)),
+          Slider(
+            value: controller.space,
+            min: 0,
+            max: 30,
+            onChanged: (value) {
+              controller.space = value;
+              controller.update();
+            },
+          )
+        ],
+      ),
+    );
+  }
+
+  Widget buildStartAnglePanel() {
+    return SliverToBoxAdapter(
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: <Widget>[
+          Text("START ANGLE", style: TextStyle(fontWeight: FontWeight.bold)),
+          Slider(
+            value: controller.startAngle,
+            min: 0,
+            max: 360,
+            label: "${controller.startAngle.toInt()}",
+            onChanged: (value) {
+              controller.startAngle = value;
+              controller.update();
+            },
+          )
+        ],
+      ),
+    );
+  }
+
+  Widget buildCircularTextAnglePositionPanel() {
+    return SliverToBoxAdapter(
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: <Widget>[
+          Text("START ANGLE ALIGNMENT",
+              style: TextStyle(fontWeight: FontWeight.bold)),
+          DropdownButton<StartAngleAlignment>(
+            value: controller.startAngleAlignment,
+            items: [
+              DropdownMenuItem(
+                child: Text("START"),
+                value: StartAngleAlignment.start,
+              ),
+              DropdownMenuItem(
+                child: Text("CENTER"),
+                value: StartAngleAlignment.center,
+              ),
+              DropdownMenuItem(
+                child: Text("END"),
+                value: StartAngleAlignment.end,
+              ),
+            ],
+            onChanged: (value) {
+              controller.startAngleAlignment = value!;
+              controller.update();
+            },
+          )
+        ],
+      ),
+    );
+  }
+
+  Widget buildCircularTextDirectionPanel() {
+    return SliverToBoxAdapter(
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: <Widget>[
+          Text("DIRECTION", style: TextStyle(fontWeight: FontWeight.bold)),
+          DropdownButton<CircularTextDirection>(
+            value: controller.direction,
+            items: [
+              DropdownMenuItem(
+                child: Text("CLOCKWISE"),
+                value: CircularTextDirection.clockwise,
+              ),
+              DropdownMenuItem(
+                child: Text("ANTI CLOCKWISE"),
+                value: CircularTextDirection.anticlockwise,
+              )
+            ],
+            onChanged: (value) {
+              controller.direction = value!;
+              controller.update();
+            },
+          )
+        ],
+      ),
+    );
+  }
+
 }
 
 class TextData {
@@ -310,6 +451,54 @@ class TextWidth extends StatelessWidget {
             children: [
               if(selectedFrame.isNotEmpty) Image.asset(selectedFrame, fit: BoxFit.cover,),
               Center(child: Text(text, style: style,textAlign: TextAlign.center,)),
+            ],
+          ),
+        );
+      },
+    );
+  }
+}
+class TextWidthCircle extends StatelessWidget {
+  final String text;
+  final String selectedFrame;
+  final TextStyle? style;
+
+  const TextWidthCircle({Key? key, this.text = "", this.selectedFrame = "", this.style}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    FrameImageController controller = Get.find();
+    return LayoutBuilder(
+      builder: (BuildContext context, BoxConstraints constraints) {
+        final TextPainter textPainter = TextPainter(
+          text: TextSpan(text: text, style: style?.copyWith(fontSize: 25,fontWeight: FontWeight.w500,)),
+          textDirection: TextDirection.ltr,
+          maxLines: 1,
+        )..layout(maxWidth: constraints.maxWidth);
+        return Container(
+          // width: textPainter.width * 1.4,
+          width: 15.h,
+          height: 15.h,
+          child: Stack(
+            children: [
+              if(selectedFrame.isNotEmpty) Image.asset(selectedFrame, fit: BoxFit.cover,),
+              Padding(
+                padding: const EdgeInsets.all(12),
+                child: CircularText(
+                  children: [
+                    TextItem(
+                      text: Text(
+                        text,
+                        style: style?.copyWith(fontSize: 25,fontWeight: FontWeight.w500,),
+                      ),
+                      space: controller.space,
+                      startAngle: controller.startAngle,
+                      startAngleAlignment: controller.startAngleAlignment,
+                      direction: controller.direction,
+                    ),
+                  ],
+                ),
+              ),
             ],
           ),
         );
