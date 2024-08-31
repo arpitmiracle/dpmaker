@@ -16,6 +16,7 @@ class ImagePath {
   static const ic_filters = 'assets/icons/ic_filters.png';
   static const ic_frames = 'assets/icons/ic_frames.png';
   static const ic_rotate_flip = 'assets/icons/ic_rotate_flip.png';
+  static const ic_rotate_flip2 = 'assets/icons/ic_rotate_flip2.png';
   static const ic_back = 'assets/icons/ic_back.png';
   static const ic_download = 'assets/icons/ic_download.png';
   static const ic_emoji = 'assets/icons/ic_emoji.png';
@@ -27,5 +28,6 @@ class ImagePath {
   static const ic_fonts = 'assets/icons/ic_fonts.png';
   static const ic_color = 'assets/icons/ic_color.png';
   static const ic_delete = 'assets/icons/ic_delete.png';
+  static const ic_round_name_settings = 'assets/icons/ic_round_name_settings.png';
 
 }

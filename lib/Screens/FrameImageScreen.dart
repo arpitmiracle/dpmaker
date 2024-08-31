@@ -179,19 +179,19 @@ class FrameImageScreen extends StatelessWidget {
                         controller: controller.tabController,
                         tabs: [
                           Tab(
-                            child: Image.asset(ImagePath.ic_filters,color: controller.tabController.index == 0 ? CustomColors.primary : CustomColors.black,),
+                            child: Image.asset(ImagePath.ic_filters,color: controller.tabController.index == 0 ? CustomColors.primary : CustomColors.black,width: 35,height: 35,),
                           ),
                           Tab(
-                            child: Image.asset(ImagePath.ic_rotate_flip,color: controller.tabController.index == 1 ? CustomColors.primary : CustomColors.black,),
+                            child: Image.asset(ImagePath.ic_rotate_flip2,color: controller.tabController.index == 1 ? CustomColors.primary : CustomColors.black,width: 30,height: 30,),
                           ),
                           Tab(
-                            child: Image.asset(ImagePath.ic_frames,color: controller.tabController.index == 2 ? CustomColors.primary : CustomColors.black,),
+                            child: Image.asset(ImagePath.ic_frames,color: controller.tabController.index == 2 ? CustomColors.primary : CustomColors.black,width: 35,height: 35,),
                           ),
                           Tab(
-                            child: Image.asset(ImagePath.ic_emoji,color: controller.tabController.index == 3 ? CustomColors.primary : CustomColors.black,),
+                            child: Image.asset(ImagePath.ic_emoji,color: controller.tabController.index == 3 ? CustomColors.primary : CustomColors.black,width: 35,height: 35,),
                           ),
                           Tab(
-                            child: Image.asset(ImagePath.ic_text,color: controller.tabController.index == 4 ? CustomColors.primary : CustomColors.black,),
+                            child: Image.asset(ImagePath.ic_text,color: controller.tabController.index == 4 ? CustomColors.primary : CustomColors.black,width: 35,height: 35,),
                           ),
                         ],
                         indicatorColor: CustomColors.primary,

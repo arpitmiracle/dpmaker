@@ -146,11 +146,11 @@ class AdsHelper {
                             padding: EdgeInsets.only(top: 5),
                             width: double.infinity,
                             color: Colors.white,
-                            child: Container(
+                            child: SizedBox(
                               height: height,
                               child: value.getMediumNativeAD(),
                             )
-                        )) : Container(height: height,child: Center(child: CircularProgressIndicator(color: CustomColors.primary),));
+                        )) : Container(height: height,child: Container());
                   },);
               }
           ) : SizedBox.shrink();

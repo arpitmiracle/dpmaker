@@ -137,7 +137,7 @@ class _FrameTextState extends State<FrameText> with SingleTickerProviderStateMix
             ),
             Divider(height: 1,color: CustomColors.primary,),
             Container(
-              width: 60.w,
+              width: 220,
               child: TabBar(
                 controller: tabController,
                 tabs: [
@@ -151,7 +151,7 @@ class _FrameTextState extends State<FrameText> with SingleTickerProviderStateMix
                     child: Image.asset(ImagePath.ic_frames,color: tabController.index == 2 ? CustomColors.primary : CustomColors.black,width: 30,),
                   ),
                   Tab(
-                    child: Image.asset(ImagePath.ic_frames,color: tabController.index == 3 ? CustomColors.primary : CustomColors.black,width: 30,),
+                    child: Image.asset(ImagePath.ic_round_name_settings,color: tabController.index == 3 ? CustomColors.primary : CustomColors.black,width: 30,),
                   ),
                 ],
                 indicatorColor: CustomColors.primary,
@@ -365,7 +365,7 @@ class _FrameTextState extends State<FrameText> with SingleTickerProviderStateMix
               style: TextStyle(fontWeight: FontWeight.bold)),
           DropdownButton<StartAngleAlignment>(
             value: controller.startAngleAlignment,
-            items: [
+            items: const [
               DropdownMenuItem(
                 child: Text("START"),
                 value: StartAngleAlignment.start,

@@ -52,7 +52,7 @@ void main() async {
   await Hive.openBox('DpMaker');
   NotificationUtils notificationUtils = NotificationUtils();
   notificationUtils.init();
-  FlutterNativeAd.init();
+  FlutterNativeAd.init(testDeviceIds: ["AD407A3057F93CDF73BC44084C712E6A"]);
   runApp(MyApp());
 }
 
