@@ -1,6 +1,7 @@
 import 'package:dpmaker/Constants/Constants.dart';
 import 'package:dpmaker/Utils/AdsHelper.dart';
 import 'package:dpmaker/Utils/circular_text.dart';
+import 'package:dpmaker/Utils/photo_filter/named_color_filter.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -17,7 +18,7 @@ class FrameImageController extends GetxController with GetTickerProviderStateMix
   late TabController stickerTabController;
   RxString selectedFrame = (framesList.first['frames'][2].toString()).obs;
   RxString selectedSticker = "".obs;
-  Rx<ColorFilter?> selectedColorFilter = (null as ColorFilter?).obs;
+  Rx<NamedColorFilter?> selectedColorFilter = (null as NamedColorFilter?).obs;
   List<Sticker> stickerList = <Sticker>[];
   AdsHelper adsHelper = AdsHelper();
   double space = 10;

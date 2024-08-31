@@ -7,8 +7,10 @@ import 'package:dpmaker/Constants/ImagePath.dart';
 import 'package:dpmaker/Screens/FrameImageScreen.dart';
 import 'package:dpmaker/Utils/AdsHelper.dart';
 import 'package:dpmaker/Utils/Utils.dart';
+import 'package:dpmaker/Utils/photo_filter/filter_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:image/image.dart' as imgs;
 
 class CropImageScreen extends StatefulWidget {
   String imagePath;
@@ -71,11 +73,13 @@ class _CropImageScreenState extends State<CropImageScreen> {
                         ui.Image img = await controller.croppedBitmap();
                         var byteData = (await img.toByteData(format: ui.ImageByteFormat.png))!.buffer.asUint8List();
                         registerAnalyticsEvent(name: EventType.frameImageScreen);
-                        Get.off(() => FrameImageScreen(imageBytes: byteData));
-                      } catch (e){} finally {
+                        File file = await ImageProcessor.saveImage(imgs.Image.fromBytes(bytes: (await img.toByteData())!.buffer,height: img.height,width: img.width),true,null);
+                        Get.off(() => FrameImageScreen(imageBytes: byteData,file: file,));
+                      } catch (e){
+                        print("eee $e");
+                      } finally {
                         progressBar.hide();
                       }
-
                     },
                   ),
                 ],

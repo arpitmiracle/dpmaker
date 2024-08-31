@@ -1,3 +1,4 @@
+import 'dart:io';
 import 'dart:math';
 import 'package:custom_elements/custom_elements.dart';
 import 'package:document_file_save_plus/document_file_save_plus.dart';
@@ -7,6 +8,8 @@ import 'package:dpmaker/Screens/MyAlbumScreen.dart';
 import 'package:dpmaker/Utils/AdsHelper.dart';
 import 'package:dpmaker/Utils/DialogHelper.dart';
 import 'package:dpmaker/Utils/Utils.dart';
+import 'package:dpmaker/Utils/photo_filter/named_color_filter.dart';
+import 'package:dpmaker/Utils/photo_filter/photo_filter.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:screenshot/screenshot.dart';
@@ -20,7 +23,8 @@ import 'Frames/frameSelection.dart';
 
 class FrameImageScreen extends StatelessWidget {
   var imageBytes;
-  FrameImageScreen({required this.imageBytes});
+  File file;
+  FrameImageScreen({required this.imageBytes,required this.file});
   FrameImageController controller = Get.put(FrameImageController());
   ScreenshotController screenshotController = ScreenshotController();
 
@@ -93,7 +97,9 @@ class FrameImageScreen extends StatelessWidget {
                                         child: Obx(() => controller.selectedColorFilter.value != null ? ClipRRect(
                                           borderRadius: BorderRadius.circular(200),
                                           child: ColorFiltered(
-                                            colorFilter: controller.selectedColorFilter.value!,
+                                            colorFilter: controller.selectedColorFilter.value!.colorFilterMatrix.isEmpty
+                                                ? const ColorFilter.mode(Colors.transparent, BlendMode.multiply)
+                                                : ColorFilter.matrix(controller.selectedColorFilter.value!.colorFilterMatrix),
                                             child: CircleAvatar(
                                               backgroundImage: MemoryImage(imageBytes,),
                                               radius: double.infinity,
@@ -167,6 +173,18 @@ class FrameImageScreen extends StatelessWidget {
                       physics: NeverScrollableScrollPhysics(),
                       children: [
                         FrameFilter(),
+                        // PhotoFilter(
+                        //   image: file,
+                        //   presets: defaultColorFilters,
+                        //   cancelIcon: Icons.cancel,
+                        //   applyIcon: Icons.check,
+                        //   backgroundColor: Colors.black,
+                        //   sliderColor: Colors.blue,
+                        //   sliderLabelStyle: TextStyle(color: Colors.white),
+                        //   bottomButtonsTextStyle: TextStyle(color: Colors.white),
+                        //   presetsLabelTextStyle: TextStyle(color: Colors.white),
+                        //   applyingTextStyle: TextStyle(color: Colors.white),
+                        // ),
                         FlipRotate(),
                         FrameSelection(),
                         FrameStickers(),

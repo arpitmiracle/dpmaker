@@ -157,11 +157,14 @@ class _HomeScreenState extends State<HomeScreen> {
   onSelected(BuildContext context, val)async{
     CustomProgressBar progressBar = CustomProgressBar();
     progressBar.show(context);
-    final XFile? image = await _picker.pickImage(source: val == 1 ? ImageSource.camera : ImageSource.gallery);
+    try{
+      final XFile? image = await _picker.pickImage(source: val == 1 ? ImageSource.camera : ImageSource.gallery);
+      progressBar.hide();
+      if(image != null){
+        registerAnalyticsEvent(name: EventType.cropImageScreen);
+        Navigator.push(context, MaterialPageRoute(builder: (context) => CropImageScreen(imagePath: image.path),));
+      }
+    } catch (e) {}
     progressBar.hide();
-    if(image != null){
-      registerAnalyticsEvent(name: EventType.cropImageScreen);
-      Navigator.push(context, MaterialPageRoute(builder: (context) => CropImageScreen(imagePath: image.path),));
-    }
   }
 }

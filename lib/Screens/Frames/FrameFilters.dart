@@ -6,6 +6,7 @@ import 'package:dpmaker/Constants/ImagePath.dart';
 import 'package:dpmaker/Controllers/FrameImageController.dart';
 import 'package:dpmaker/Utils/AdsHelper.dart';
 import 'package:dpmaker/Utils/DialogHelper.dart';
+import 'package:dpmaker/Utils/photo_filter/named_color_filter.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart' show ViewportOffset;
 import 'package:get/get.dart';
@@ -17,11 +18,13 @@ class FrameFilter extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GridView.builder(
-      itemCount: filtersList.length,
+      itemCount: defaultColorFilters.length,
+      shrinkWrap: true,
       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
         crossAxisCount: 4,
         mainAxisSpacing: 10,
         crossAxisSpacing: 10,
+
       ),
       padding: EdgeInsets.all(10),
       itemBuilder: (context, index) {
@@ -34,23 +37,30 @@ class FrameFilter extends StatelessWidget {
             //     },);
             //   },);
             // } else {
-              controller.selectedColorFilter.value = filtersList[index];
+              controller.selectedColorFilter.value = defaultColorFilters[index];
             // }
           },
           child: Stack(
             children: [
-              ClipRRect(
-                borderRadius: BorderRadius.circular(180),
-                child: ColorFiltered(
-                  colorFilter: filtersList[index],
-                  child: CircleAvatar(
-                    backgroundImage: AssetImage(ImagePath.img_filter),
-                    radius: double.infinity,
+              Align(
+                alignment: Alignment.topCenter,
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(180),
+                  child: ColorFiltered(
+                    // colorFilter: filtersList[index],
+                    colorFilter: defaultColorFilters[index].colorFilterMatrix.isEmpty
+                        ? const ColorFilter.mode(Colors.transparent, BlendMode.multiply)
+                        : ColorFilter.matrix(defaultColorFilters[index].colorFilterMatrix),
+                    child: CircleAvatar(
+                      backgroundImage: AssetImage(ImagePath.img_filter),
+                      radius: 28,
+                      child: Obx(() => (controller.selectedColorFilter.value?.colorFilterMatrix == defaultColorFilters[index].colorFilterMatrix) ? Center(child: Icon(Icons.done,color: CustomColors.white,),) : SizedBox()),
+                    ),
                   ),
                 ),
               ),
               // Obx(() => (controller.selectedColorFilter.value == filtersList[index]) ? Center(child: Icon(Icons.done,color: CustomColors.white,),) : (index > 2) ? Center(child: Icon(Icons.lock,color: CustomColors.white,),) : SizedBox())
-              Obx(() => (controller.selectedColorFilter.value == filtersList[index]) ? Center(child: Icon(Icons.done,color: CustomColors.white,),) : SizedBox())
+              Obx(() => Align(alignment: Alignment.bottomCenter,child: Text("${defaultColorFilters[index].name}",style: TextStyle(color: (controller.selectedColorFilter.value?.colorFilterMatrix == defaultColorFilters[index].colorFilterMatrix) ? CustomColors.primary : CustomColors.black,fontSize: 12,),),)),
 
             ],
           ),
