@@ -12,7 +12,7 @@ import 'package:get/get.dart';
 import 'FrameStickers.dart';
 
 class FrameText extends StatefulWidget {
-  TextWidth? stickerText;
+  TextWidthCircle? stickerText;
   FrameText({Key? key,this.stickerText}) : super(key: key);
 
   @override
@@ -100,7 +100,7 @@ class _FrameTextState extends State<FrameText> with SingleTickerProviderStateMix
                     ),
                     child: GetBuilder<FrameImageController>(
                       builder: (controller) {
-                        return Center(child: TextWidthCircle(selectedFrame: selectedFrame,text: textEditingController.text,style: TextStyle(color: selectedColor,fontFamily: selectedFont)));
+                        return Center(child: TextWidthCircle(selectedFrame: selectedFrame,text: textEditingController.text,style: TextStyle(color: selectedColor,fontFamily: selectedFont,fontSize: 25,)));
                       },
                     ),
                   ),

@@ -24,7 +24,6 @@ class FrameFilter extends StatelessWidget {
         crossAxisCount: 4,
         mainAxisSpacing: 10,
         crossAxisSpacing: 10,
-
       ),
       padding: EdgeInsets.all(10),
       itemBuilder: (context, index) {
@@ -37,7 +36,8 @@ class FrameFilter extends StatelessWidget {
             //     },);
             //   },);
             // } else {
-              controller.selectedColorFilter.value = defaultColorFilters[index];
+            registerAnalyticsEvent(name: "filter_${defaultColorFilters[index].name}");
+            controller.selectedColorFilter.value = defaultColorFilters[index];
             // }
           },
           child: Stack(

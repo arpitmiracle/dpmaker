@@ -7,6 +7,7 @@ import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_native_ad/flutter_native_ad.dart';
 import 'package:get/get.dart';
@@ -52,7 +53,7 @@ void main() async {
   await Hive.openBox('DpMaker');
   NotificationUtils notificationUtils = NotificationUtils();
   notificationUtils.init();
-  FlutterNativeAd.init(testDeviceIds: ["AD407A3057F93CDF73BC44084C712E6A"]);
+  FlutterNativeAd.init();
   runApp(MyApp());
 }
 
@@ -75,6 +76,10 @@ class _MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.portraitUp,
+      DeviceOrientation.portraitDown
+    ]);
     return Sizer(
       builder: (context,orientation,deviceType) {
         return ValueListenableBuilder(

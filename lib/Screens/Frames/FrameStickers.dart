@@ -53,6 +53,7 @@ class FrameStickers extends StatelessWidget {
                       //     },);
                       //   },);
                       // } else {
+                        registerAnalyticsEvent(name: "sticker_${stickersList[i]['stickers'][index].toString().replaceAll("assets/stickers/", "").replaceAll(".png", "").replaceAll("/", "_")}");
                         controller.stickerList.add(Sticker(id: "Sticker$index${DateTime.now().hashCode}",child: Container(height: 40,width: 40,child: Center(child: Image.asset(stickersList[i]['stickers'][index],fit: BoxFit.cover,))),));
                         controller.update();
                       // }

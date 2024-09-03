@@ -87,7 +87,8 @@ class AdsHelper {
 
   static showInterstitialAd({bool ignoreCount = false})async{
     if(ignoreCount){
-     return isInterstitialAdReady ? await interstitialAd.interstitialAd?.show() : null;
+     isInterstitialAdReady ? await interstitialAd.interstitialAd?.show() : null;
+     loadInterstitialAd(ignoreCount: ignoreCount);
     } else {
       adCount++;
       if(adCount >= maxAdCount){

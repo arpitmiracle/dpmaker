@@ -27,6 +27,7 @@ class EventType {
   static String myAlbumScreen = "my_album_screen";
   static String frameImageScreen = "frame_image_screen";
   static String cropImageScreen = "crop_image_screen";
+  static String download_image = "download_image";
 }
 
 bool checkResponse(int? code){

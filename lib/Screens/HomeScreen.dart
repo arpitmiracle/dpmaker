@@ -54,6 +54,7 @@ class _HomeScreenState extends State<HomeScreen> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.end,
               children: [
+                SizedBox(height: MediaQuery.of(context).padding.top,),
                 Expanded(
                   child: Container(
                     padding: EdgeInsets.all(5.w),

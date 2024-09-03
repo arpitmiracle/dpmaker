@@ -2,6 +2,7 @@ import 'dart:io';
 import 'dart:math';
 import 'package:custom_elements/custom_elements.dart';
 import 'package:document_file_save_plus/document_file_save_plus.dart';
+import 'package:dpmaker/Constants/Constants.dart';
 import 'package:dpmaker/Constants/ImagePath.dart';
 import 'package:dpmaker/Controllers/FrameImageController.dart';
 import 'package:dpmaker/Screens/MyAlbumScreen.dart';
@@ -70,6 +71,7 @@ class FrameImageScreen extends StatelessWidget {
                           child: Image.asset(ImagePath.ic_download),
                           onTap: () async {
                             await AdsHelper.showInterstitialAd(ignoreCount: true);
+                            registerAnalyticsEvent(name: EventType.download_image);
                             saveImage();
                           },
                         ),
@@ -125,9 +127,9 @@ class FrameImageScreen extends StatelessWidget {
                                       onEdit: (stkr) async {
                                         AdsHelper.showInterstitialAd();
                                         if(stkr.isText == true){
-                                          TextData? data = await Navigator.push(context, MaterialPageRoute(builder: (context) => FrameText(stickerText: stkr.child as TextWidth?),));
+                                          TextData? data = await Navigator.push(context, MaterialPageRoute(builder: (context) => FrameText(stickerText: stkr.child as TextWidthCircle?),));
                                           if(data != null) {
-                                            controller.stickerList[controller.stickerList.indexWhere((element) => element.id == stkr.id)] = Sticker(id: stkr.id,isText: true,child: TextWidth(selectedFrame: data.frame,text: data.text,style: TextStyle(color: data.color,fontFamily: data.font)),);
+                                            controller.stickerList[controller.stickerList.indexWhere((element) => element.id == stkr.id)] = Sticker(id: stkr.id,isText: true,child: TextWidthCircle(selectedFrame: data.frame,text: data.text,style: TextStyle(color: data.color,fontFamily: data.font,fontSize: 25,)),);
                                             controller.update();
                                           }
                                         }
@@ -219,7 +221,7 @@ class FrameImageScreen extends StatelessWidget {
                             controller.tabController.animateTo(controller.tabController.previousIndex);
                             TextData? data = await Navigator.push(context, MaterialPageRoute(builder: (context) => FrameText(),));
                             if(data != null) {
-                              controller.stickerList.add(Sticker(id: "Text${DateTime.now().hashCode}",isText: true,child: TextWidth(selectedFrame: data.frame,text: data.text,style: TextStyle(color: data.color,fontFamily: data.font)),));
+                              controller.stickerList.add(Sticker(id: "Text${DateTime.now().hashCode}",isText: true,child: TextWidthCircle(selectedFrame: data.frame,text: data.text,style: TextStyle(color: data.color,fontFamily: data.font,fontSize: 25,)),));
                               controller.update();
                             }
                           }
