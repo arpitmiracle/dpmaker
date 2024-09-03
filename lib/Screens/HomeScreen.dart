@@ -1,4 +1,6 @@
+import 'dart:async';
 import 'dart:io';
+import 'dart:math';
 import 'package:dpmaker/Constants/Constants.dart';
 import 'package:dpmaker/Screens/CropImageScreen.dart';
 import 'package:dpmaker/Screens/SendNotificationScreen.dart';
@@ -26,6 +28,27 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   final ImagePicker _picker = ImagePicker();
   AdsHelper adsHelper = AdsHelper();
+  List<String> backgroundImages = [
+    ImagePath.bg_home,
+    ImagePath.ic_color,
+    ImagePath.ic_download,
+  ];
+  int _currentIndex = Random().nextInt(2);
+  Timer? _timer;
+
+  @override
+  void dispose() {
+    _timer?.cancel();
+    super.dispose();
+  }
+
+  void _startTimer() {
+    _timer = Timer.periodic(Duration(seconds: 5), (Timer timer) {
+      setState(() {
+        _currentIndex = (_currentIndex + 1) % backgroundImages.length;
+      });
+    });
+  }
 
   @override
   void initState() {
@@ -33,6 +56,7 @@ class _HomeScreenState extends State<HomeScreen> {
     AdsHelper.loadInterstitialAd();
     adsHelper.loadMediumNativeAd();
     adsHelper.loadBannerAd();
+    _startTimer();
     super.initState();
   }
 
@@ -47,7 +71,7 @@ class _HomeScreenState extends State<HomeScreen> {
             width: 100.w,
             decoration: BoxDecoration(
                 image: DecorationImage(
-                  image: AssetImage(ImagePath.bg_home),
+                  image: AssetImage(backgroundImages[_currentIndex]),
                   fit: BoxFit.cover,
                 )
             ),
