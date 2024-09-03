@@ -210,6 +210,7 @@ class _FrameTextState extends State<FrameText> with SingleTickerProviderStateMix
                                 //   },);
                                 // } else {
                                   setState(() {
+                                    registerAnalyticsEvent(name: "frame_${framesList[i]['frames'][index].toString().replaceAll("assets/frames/", "").replaceAll(".png", "").replaceAll("/", "_")}");
                                     selectedFrame = framesList[i]['frames'][index];
                                   });
                                 // }
@@ -254,6 +255,7 @@ class _FrameTextState extends State<FrameText> with SingleTickerProviderStateMix
         return InkWell(
           onTap: () {
             setState(() {
+              registerAnalyticsEvent(name: "font_${fontsList[index]}");
               selectedFont = fontsList[index];
             });
           },
@@ -283,6 +285,7 @@ class _FrameTextState extends State<FrameText> with SingleTickerProviderStateMix
         return InkWell(
           onTap: () {
             setState(() {
+              registerAnalyticsEvent(name: "color_${colorsList[index].toString().replaceAll("Color(0xff", "").replaceAll(")", "")}");
               selectedColor = colorsList[index];
             });
           },
