@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:custom_elements/custom_elements.dart';
 import 'package:dpmaker/Constants/Constants.dart';
 import 'package:dpmaker/Controllers/FrameImageController.dart';
@@ -60,7 +61,7 @@ class FrameStickers extends StatelessWidget {
                     },
                     child: Stack(
                       children: [
-                        Image.asset(stickersList[i]['stickers'][index]),
+                        CachedNetworkImage(imageUrl: stickersList[i]['stickers'][index]),
                         // if(index > 2) Center(child: Icon(Icons.lock,),),
                       ],
                     ),

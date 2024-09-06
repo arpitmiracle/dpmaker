@@ -1,5 +1,6 @@
 import 'dart:io';
 import 'dart:math';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:custom_elements/custom_elements.dart';
 import 'package:document_file_save_plus/document_file_save_plus.dart';
 import 'package:dpmaker/Constants/Constants.dart';
@@ -115,10 +116,12 @@ class FrameImageScreen extends StatelessWidget {
                                   ),)
                               ),
                               if(controller.selectedFrame.value.isNotEmpty) Transform.rotate(
-                                angle: controller.currentRotation.value,
-                                child: Image.asset(controller.selectedFrame.value, fit: BoxFit.cover,),
+                                angle: controller.currentRotation.value, child: CachedNetworkImage(
+                                  fit: BoxFit.cover,
+                                  imageUrl: controller.selectedFrame.value,
+                                ),
                               ),
-                              if(controller.selectedSticker.value.isNotEmpty) Center(child: Image.asset(controller.selectedSticker.value,height: 30,)),
+                              if(controller.selectedSticker.value.isNotEmpty) Center(child: CachedNetworkImage(imageUrl: controller.selectedSticker.value, height: 30,),),
                               Center(
                                 child: GetBuilder<FrameImageController>(
                                   builder: (controller) {

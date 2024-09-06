@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:custom_elements/custom_elements.dart';
 import 'package:dpmaker/Constants/Constants.dart';
 import 'package:dpmaker/Controllers/FrameImageController.dart';
@@ -59,7 +60,7 @@ class FrameSelection extends StatelessWidget {
                     },
                     child: Stack(
                       children: [
-                        framesList[i]['frames'][index].toString().isEmpty ? Container() : Image.asset(framesList[i]['frames'][index]),
+                        framesList[i]['frames'][index].toString().isEmpty ? Container() : CachedNetworkImage( imageUrl: framesList[i]['frames'][index],),
                         // Obx(() => (controller.selectedFrame.value == framesList[i]['frames'][index]) ? Center(child: Icon(Icons.done),) : (index > 2) ? Center(child: Icon(Icons.lock,),) : SizedBox())
                         Obx(() => (controller.selectedFrame.value == framesList[i]['frames'][index]) ? Center(child: Icon(Icons.done),) : SizedBox())
                       ],
