@@ -696,7 +696,7 @@ List stickersList = [
       "https://res.cloudinary.com/dqbfb0g4w/image/upload/v1725537217/dpmaker/stickers/Line%20Art/ovypbge1963f83kaw6xu.png",
       "https://res.cloudinary.com/dqbfb0g4w/image/upload/v1725537212/dpmaker/stickers/Line%20Art/m6xzrxkc9xfs9k7hqedp.png",
       "https://res.cloudinary.com/dqbfb0g4w/image/upload/v1725537213/dpmaker/stickers/Line%20Art/va98ic0p6lht5zha4krp.png",
-      "https://res.cloudinary.com/dqbfb0g4w/image/upload/v1725537214/dpmaker/stickers/Line%20Art/qwzlavlephi3h3pepqbk.png",
+      "https://res.cloudinary.com/dqbfb0g4w/image/upload/v1725537213/dpmaker/stickers/Line%20Art/neysqcv9bjemr9jx23ge.png",
       "https://res.cloudinary.com/dqbfb0g4w/image/upload/v1725537214/dpmaker/stickers/Line%20Art/qwzlavlephi3h3pepqbk.png",
       "https://res.cloudinary.com/dqbfb0g4w/image/upload/v1725537214/dpmaker/stickers/Line%20Art/pphsoxk2rtoxewev4ale.png",
       "https://res.cloudinary.com/dqbfb0g4w/image/upload/v1725537215/dpmaker/stickers/Line%20Art/b6fghbhyvvmqalc5atvc.png",
