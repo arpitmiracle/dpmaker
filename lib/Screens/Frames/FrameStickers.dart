@@ -4,6 +4,7 @@ import 'package:dpmaker/Constants/Constants.dart';
 import 'package:dpmaker/Controllers/FrameImageController.dart';
 import 'package:dpmaker/Utils/AdsHelper.dart';
 import 'package:dpmaker/Utils/DialogHelper.dart';
+import 'package:dpmaker/Utils/Utils.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sticker_view/stickerview.dart';
@@ -62,7 +63,7 @@ class FrameStickers extends StatelessWidget {
                     },
                     child: Stack(
                       children: [
-                        CachedNetworkImage(imageUrl: stickersList[i]['stickers'][index]),
+                        CachedNetworkImage(imageUrl: stickersList[i]['stickers'][index],placeholder: (context, url) => Utils.shimmerWidget(radius: 10),),
                         // if(index > 2) Center(child: Icon(Icons.lock,),),
                       ],
                     ),

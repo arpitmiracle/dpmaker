@@ -7,6 +7,7 @@ import 'package:dpmaker/Utils/Extentions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:h3m_shimmer_card/h3m_shimmer_card.dart';
 
 ///  this class contains small functions like validation and checking
 ///  functions that we can use in all pages.
@@ -18,6 +19,16 @@ class Utils {
       toastLength: Toast.LENGTH_SHORT
   );
  }
+
+ static shimmerWidget({double height = 100,double width = 100,double radius = 0.0}) => ShimmerCard(
+  width: width,
+  height: height,
+  borderRadius: radius,
+  beginAlignment: Alignment.topLeft,
+  endAlignment: Alignment.bottomRight,
+  backgroundColor: Colors.grey.shade500,
+  shimmerColor: Colors.grey.shade300,
+ );
 
  static List<File> fetchAllMedia() {
   List<File> photos = [];

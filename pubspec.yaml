@@ -67,6 +67,7 @@ dependencies:
   firebase_cloud_messaging_flutter: ^1.0.6
   path_provider: ^2.1.4
   cached_network_image: ^3.3.1
+  h3m_shimmer_card: ^0.0.2
 
 dev_dependencies:
   flutter_test:

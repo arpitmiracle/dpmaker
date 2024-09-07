@@ -516,6 +516,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.6.0"
+  h3m_shimmer_card:
+    dependency: "direct main"
+    description:
+      name: h3m_shimmer_card
+      sha256: de0af8e0eeca03c06983d82ea74b9e5db497286d6e8a5a7a64cdb137faf9b9a8
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.0.2"
   hive:
     dependency: transitive
     description:
