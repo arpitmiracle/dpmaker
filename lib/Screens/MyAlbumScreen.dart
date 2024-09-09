@@ -110,42 +110,6 @@ class _MyAlbumScreenState extends State<MyAlbumScreen> {
                       ],
                     ),
                   );
-                  return Stack(
-                    children: [
-                      InkWell(
-                        onTap: () {
-                          MultiImageProvider multiImageProvider = MultiImageProvider(List.generate(allMedia.length,(index) => FileImage(allMedia[index]),));
-
-                          showImageViewerPager(context, multiImageProvider, onPageChanged: (page) {
-                            print("page changed to $page");
-                          },swipeDismissible: true,doubleTapZoomable: true, onViewerDismissed: (page) {
-                            print("dismissed while on page $page");
-                          });
-
-                        },
-                        child: Image.file(allMedia[index],height: 45.w,width: 45.w,),
-                      ),
-                      Align(
-                        alignment: Alignment.bottomRight,
-                        child: Column(
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            IconButton(onPressed: () {
-                              DialogHelper.AdConfirmationDialog(context, title: "Delete image", desc: "Are you sure you want to delete this image?",yes: "Yes", onYes: () async {
-                                await Utils.deleteFile(allMedia[index]);
-                                setState(() {
-                                  allMedia = Utils.fetchAllMedia();
-                                });
-                              },);
-                            }, icon: Image.asset(ImagePath.ic_delete,height: 40,)),
-                            IconButton(onPressed: () {
-                              Share.shareXFiles([XFile(allMedia[index].path)]);
-                            }, icon: Image.asset(ImagePath.ic_share,height: 40,),),
-                          ],
-                        ),
-                      ),
-                    ],
-                  );
                 },)
               // GridView.builder(
               //   padding: EdgeInsets.all(10),

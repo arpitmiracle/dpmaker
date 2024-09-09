@@ -26,6 +26,7 @@ class FrameImageController extends GetxController with GetTickerProviderStateMix
   bool showStroke = false;
   StartAngleAlignment startAngleAlignment = StartAngleAlignment.end;
   CircularTextDirection direction = CircularTextDirection.anticlockwise;
+  double paddingText = 11;
 
   @override
   void onInit() {

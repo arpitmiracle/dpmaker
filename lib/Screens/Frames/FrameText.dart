@@ -309,6 +309,7 @@ class _FrameTextState extends State<FrameText> with SingleTickerProviderStateMix
         builder: (controller) {
           return CustomScrollView(
             slivers: <Widget>[
+              buildPaddingText(),
               buildSpacePanel(),
               buildStartAnglePanel(),
               buildCircularTextAnglePositionPanel(),
@@ -332,6 +333,26 @@ class _FrameTextState extends State<FrameText> with SingleTickerProviderStateMix
             max: 30,
             onChanged: (value) {
               controller.space = value;
+              controller.update();
+            },
+          )
+        ],
+      ),
+    );
+  }
+
+  Widget buildPaddingText() {
+    return SliverToBoxAdapter(
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: <Widget>[
+          Text("TEXT PADDING", style: TextStyle(fontWeight: FontWeight.bold)),
+          Slider(
+            value: controller.paddingText,
+            min: 0,
+            max: 30,
+            onChanged: (value) {
+              controller.paddingText = value;
               controller.update();
             },
           )
@@ -488,7 +509,7 @@ class TextWidthCircle extends StatelessWidget {
             children: [
               if(selectedFrame.isNotEmpty) CachedNetworkImage( imageUrl: selectedFrame,fit: BoxFit.cover,placeholder: (context, url) => Utils.shimmerWidget(radius: 50),),
               Padding(
-                padding: const EdgeInsets.all(12),
+                padding: EdgeInsets.all(controller.paddingText),
                 child: CircularText(
                   children: [
                     TextItem(
