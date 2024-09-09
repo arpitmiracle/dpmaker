@@ -30,10 +30,14 @@ class _HomeScreenState extends State<HomeScreen> {
   AdsHelper adsHelper = AdsHelper();
   List<String> backgroundImages = [
     ImagePath.bg_home,
-    ImagePath.ic_color,
-    ImagePath.ic_download,
+    ImagePath.bg_home2,
+    ImagePath.bg_home3,
+    ImagePath.bg_home4,
+    ImagePath.bg_home5,
+    ImagePath.bg_home6,
+    ImagePath.bg_home7,
   ];
-  int _currentIndex = Random().nextInt(2);
+  int _currentIndex = Random().nextInt(7);
   Timer? _timer;
 
   @override

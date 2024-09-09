@@ -3,6 +3,12 @@
 
 class ImagePath {
   static const bg_home = 'assets/images/bg_home.jpg';
+  static const bg_home2 = 'assets/images/bg_home2.png';
+  static const bg_home3 = 'assets/images/bg_home3.png';
+  static const bg_home4 = 'assets/images/bg_home4.png';
+  static const bg_home5 = 'assets/images/bg_home5.png';
+  static const bg_home6 = 'assets/images/bg_home6.png';
+  static const bg_home7 = 'assets/images/bg_home7.png';
   static const ic_camera = 'assets/images/ic_camera.png';
   static const ic_gallery = 'assets/images/ic_gallery.png';
   static const ic_my_album = 'assets/images/ic_my_album.png';

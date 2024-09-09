@@ -1,9 +1,11 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:custom_elements/custom_elements.dart';
 import 'package:dpmaker/Constants/Constants.dart';
 import 'package:dpmaker/Constants/ImagePath.dart';
 import 'package:dpmaker/Controllers/FrameImageController.dart';
 import 'package:dpmaker/Utils/AdsHelper.dart';
 import 'package:dpmaker/Utils/DialogHelper.dart';
+import 'package:dpmaker/Utils/Utils.dart';
 import 'package:dpmaker/Utils/circular_text.dart';
 import 'package:dpmaker/main.dart';
 import 'package:flutter/material.dart';
@@ -210,14 +212,14 @@ class _FrameTextState extends State<FrameText> with SingleTickerProviderStateMix
                                 //   },);
                                 // } else {
                                   setState(() {
-                                    registerAnalyticsEvent(name: "frame_${framesList[i]['frames'][index].toString().replaceAll("assets/frames/", "").replaceAll(".png", "").replaceAll("/", "_")}");
+                                    registerAnalyticsEvent(name: "frame_${framesList[i]['category']}_${index}");
                                     selectedFrame = framesList[i]['frames'][index];
                                   });
                                 // }
                               },
                               child: Stack(
                                 children: [
-                                  framesList[i]['frames'][index].toString().isEmpty ? Container() : Image.asset(framesList[i]['frames'][index]),
+                                  framesList[i]['frames'][index].toString().isEmpty ? Container() : CachedNetworkImage( imageUrl: framesList[i]['frames'][index],placeholder: (context, url) => Utils.shimmerWidget(radius: 50),),
                                   // (selectedFrame == framesList[i]['frames'][index]) ? Center(child: Icon(Icons.done),) : (index > 2) ? Center(child: Icon(Icons.lock,),) : SizedBox()
                                   (selectedFrame == framesList[i]['frames'][index]) ? Center(child: Icon(Icons.done),) : SizedBox()
                                 ],
@@ -484,7 +486,7 @@ class TextWidthCircle extends StatelessWidget {
           height: 15.h,
           child: Stack(
             children: [
-              if(selectedFrame.isNotEmpty) Image.asset(selectedFrame, fit: BoxFit.cover,),
+              if(selectedFrame.isNotEmpty) CachedNetworkImage( imageUrl: selectedFrame,fit: BoxFit.cover,placeholder: (context, url) => Utils.shimmerWidget(radius: 50),),
               Padding(
                 padding: const EdgeInsets.all(12),
                 child: CircularText(

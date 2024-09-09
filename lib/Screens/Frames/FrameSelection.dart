@@ -55,7 +55,7 @@ class FrameSelection extends StatelessWidget {
                       //     },);
                       //   },);
                       // } else {
-                      registerAnalyticsEvent(name: "frame_${framesList[i]['frames'][index].toString().replaceAll("assets/frames/", "").replaceAll(".png", "").replaceAll("/", "_")}");
+                      registerAnalyticsEvent(name: "frame_${framesList[i]['category']}_${index}");
                       controller.selectedFrame.value = framesList[i]['frames'][index];
                       // }
                     },
