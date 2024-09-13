@@ -1,5 +1,6 @@
 
 import 'package:custom_elements/custom_elements.dart';
+import 'package:dpmaker/Constants/Constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_native_ad/flutter_native_ad.dart';
 
@@ -38,6 +39,7 @@ class AdsHelper {
   ValueNotifier bannerAdNotifier = ValueNotifier(null);
 
   loadBannerAd()async{
+    printLog("loadBannerAd ${googleBannerAdID}");
     bannerAdNotifier.value = null;
     var ad = FlutterBannerAd();
     await ad.loadBannerAd(
@@ -100,6 +102,7 @@ class AdsHelper {
   }
 
   static loadInterstitialAd({bool ignoreCount = false}) async{
+    printLog("loadInterstitialAd ${googleInterstitialAdID}");
     interstitialAd = FlutterInterstitialAd();
     await interstitialAd.loadInterstitialAd(adUnitId:googleInterstitialAdID,onAdLoaded: (ad) {
       interstitialAd.interstitialAd = ad;
@@ -114,6 +117,7 @@ class AdsHelper {
   ValueNotifier<bool> isNativeMediumLoadedNotifier = ValueNotifier<bool>(false);
 
   loadMediumNativeAd()async{
+    printLog("loadMediumNativeAd ${googleMediumNativeAdID}");
     nativeMediumAdNotifier.value = null;
     isNativeMediumLoadedNotifier.value = false;
     var ad = FlutterNativeAd();

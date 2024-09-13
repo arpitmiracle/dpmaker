@@ -17,6 +17,7 @@ import 'package:dpmaker/Utils/Utils.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:upgrader/upgrader.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 import 'MyAlbumScreen.dart';
 
@@ -57,11 +58,25 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   void initState() {
     registerAnalyticsEvent(name: EventType.homeScreen);
+    _startTimer();
+    super.initState();
+  }
+
+  initData()async{
+    final data = await FirebaseFirestore.instance
+        .collection('dpmaker_ads').doc("ads_configuration")
+        .get();
+    Map allData = data.data() as Map;
+    printLog("allData $allData");
+    AdsHelper.googleBannerAdID =  allData["googleBannerAdID"].toString();
+    AdsHelper.googleInterstitialAdID =  allData["googleInterstitialAdID"].toString();
+    AdsHelper.googleMediumNativeAdID =  allData["googleMediumNativeAdID"].toString();
+    AdsHelper.googleOpenAdID =  allData["googleOpenAdID"].toString();
+    AdsHelper.maxAdCount =  int.tryParse(allData["googleOpenAdID"].toString()) ?? 4;
+
     AdsHelper.loadInterstitialAd();
     adsHelper.loadMediumNativeAd();
     adsHelper.loadBannerAd();
-    _startTimer();
-    super.initState();
   }
 
   @override
