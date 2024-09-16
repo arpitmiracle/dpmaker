@@ -6,7 +6,7 @@ import 'dart:developer' as d;
 ///  it helps to centralize all constant values.
 
 const DEBUG = true;
-const InDevelopment = true;
+const InDevelopment = false;
 const defaultFontFamily = null;
 ValueNotifier<Locale> currentAppLocal = ValueNotifier(Locale('en',''));
 List<Locale> supportedLocales = const [
