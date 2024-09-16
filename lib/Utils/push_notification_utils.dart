@@ -64,6 +64,8 @@ class NotificationUtils {
     var token = await FirebaseMessaging.instance.getToken();
     printLog("TOKEN ========================================== $token");
 
+    FirebaseMessaging.instance.subscribeToTopic("all");
+
     /// Update the iOS foreground notification presentation options to allow
     /// heads up notifications.
     await FirebaseMessaging.instance

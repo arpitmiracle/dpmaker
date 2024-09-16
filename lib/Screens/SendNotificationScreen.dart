@@ -59,17 +59,11 @@ class Sendnotificationscreen extends StatelessWidget {
                     validateOnly: false,
                     message: FirebaseMessage(
                       notification: FirebaseNotification(
-                        title: 'Package by Ottoman',
-                        body: 'Ottoman added something new! 🔥',
+                        title: titleController.text.trim(),
+                        body: bodyController.text.trim(),
                       ),
                       android: FirebaseAndroidConfig(
                         ttl: '2s',
-
-                        /// Add Delay in String. If you want to add 1 minute delat then add it like "60s"
-                        notification: FirebaseAndroidNotification(
-                          icon: 'ic_notification',
-                          color: '#009999',
-                        ),
                       ),
                       topic: "all",
                       // token: token,
